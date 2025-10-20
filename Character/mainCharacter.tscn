@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://dwc0l58w43i6y"]
+
+[ext_resource type="Texture2D" uid="uid://tll38ccr2jts" path="res://resources/knight/IDLE.png" id="1_lv3og"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2n14"]
+atlas = ExtResource("1_lv3og")
+region = Rect2(0, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slnnu"]
+atlas = ExtResource("1_lv3og")
+region = Rect2(96, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7igyw"]
+atlas = ExtResource("1_lv3og")
+region = Rect2(192, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hq1pj"]
+atlas = ExtResource("1_lv3og")
+region = Rect2(288, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4d33"]
+atlas = ExtResource("1_lv3og")
+region = Rect2(384, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efxbq"]
+atlas = ExtResource("1_lv3og")
+region = Rect2(480, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb58w"]
+atlas = ExtResource("1_lv3og")
+region = Rect2(576, 0, 96, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q41tm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2n14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slnnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7igyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hq1pj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4d33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efxbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nb58w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j2ds1"]
+height = 40.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q41tm")
+frame_progress = 0.32621932
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_j2ds1")
