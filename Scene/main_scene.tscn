@@ -1,17 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://bdvclu03c11qk"]
 
 [ext_resource type="PackedScene" uid="uid://dwc0l58w43i6y" path="res://Character/mainCharacter.tscn" id="1_j4qrl"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4qrl"]
-size = Vector2(1155, 80)
+[ext_resource type="PackedScene" uid="uid://dvo5wsrwk0ul1" path="res://background/floor_test.tscn" id="2_31fxm"]
 
 [node name="MainScene" type="Node2D"]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_j4qrl")]
+[node name="Player" parent="." instance=ExtResource("1_j4qrl")]
 position = Vector2(3, -20)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.5, 40)
-shape = SubResource("RectangleShape2D_j4qrl")
+speed = 120.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="floor_test" parent="." instance=ExtResource("2_31fxm")]
+position = Vector2(1, 78)
+scale = Vector2(7.1171875, 0.25000003)
