@@ -1,16 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdvclu03c11qk"]
+[gd_scene load_steps=4 format=3 uid="uid://bdvclu03c11qk"]
 
 [ext_resource type="PackedScene" uid="uid://dwc0l58w43i6y" path="res://Character/mainCharacter.tscn" id="1_j4qrl"]
 [ext_resource type="PackedScene" uid="uid://dvo5wsrwk0ul1" path="res://background/floor_test.tscn" id="2_31fxm"]
+[ext_resource type="PackedScene" uid="uid://cur35m2h0ceuq" path="res://Character/monster.tscn" id="3_06yma"]
 
 [node name="MainScene" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_j4qrl")]
 position = Vector2(3, -20)
-speed = 120.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="floor_test" parent="." instance=ExtResource("2_31fxm")]
 position = Vector2(1, 78)
 scale = Vector2(7.1171875, 0.25000003)
+
+[node name="monster" parent="." instance=ExtResource("3_06yma")]
+position = Vector2(276, 43)

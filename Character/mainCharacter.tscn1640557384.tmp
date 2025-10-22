@@ -326,10 +326,7 @@ animation = &"attack01"
 [node name="characterCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_j2ds1")
 
-[node name="AttackArea" type="Area2D" parent="."]
-monitorable = false
-
-[node name="attackCollision" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(20, 0)
+[node name="attackCollision" type="CollisionShape2D" parent="."]
+position = Vector2(1, 40)
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_efxbq")
