@@ -1,8 +1,9 @@
-[gd_scene load_steps=48 format=3 uid="uid://dwc0l58w43i6y"]
+[gd_scene load_steps=49 format=3 uid="uid://dwc0l58w43i6y"]
 
-[ext_resource type="Script" uid="uid://bblkm0wjo84ak" path="res://Character/character.gd" id="1_c2n14"]
+[ext_resource type="Script" uid="uid://bblkm0wjo84ak" path="res://classes/character.gd" id="1_c2n14"]
 [ext_resource type="Texture2D" uid="uid://tll38ccr2jts" path="res://resources/knight/IDLE.png" id="1_lv3og"]
 [ext_resource type="Texture2D" uid="uid://cpfqbv7pynf3f" path="res://resources/knight/ATTACK 1.png" id="2_efxbq"]
+[ext_resource type="PackedScene" uid="uid://6jni1qqa7o3w" path="res://classes/health.tscn" id="2_nb58w"]
 [ext_resource type="Texture2D" uid="uid://b4nq238y8d82i" path="res://resources/knight/JUMP.png" id="3_7igyw"]
 [ext_resource type="Texture2D" uid="uid://s1fm4ejuhkff" path="res://resources/knight/ATTACK 2.png" id="3_nb58w"]
 [ext_resource type="Texture2D" uid="uid://nbquo0ixybrr" path="res://resources/knight/WALK.png" id="3_slnnu"]
@@ -318,6 +319,8 @@ height = 40.0
 [node name="mainCharacter" type="CharacterBody2D"]
 slide_on_ceiling = false
 script = ExtResource("1_c2n14")
+
+[node name="Health" parent="." instance=ExtResource("2_nb58w")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_q41tm")

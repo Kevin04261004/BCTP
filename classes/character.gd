@@ -14,6 +14,15 @@
 # TODO: 죽음 만들기
 # NEXT: 플레이어 및 몬스터 리펙토링 진행하기
 
+# Player
+ #├─ Movement
+ #├─ Health
+ #├─ Attack
+ #└─ Effects
+	#├─ ParticleEffect
+	#└─ SoundEffect
+
+class_name PlayerMovement
 extends CharacterBody2D
 
 @onready var animations : AnimatedSprite2D = $AnimatedSprite2D;
@@ -82,8 +91,15 @@ func overlapAttackCollision() -> void:
 	
 	for area in areas:
 		var parentObj = area.get_parent();
-		# 인터페이스 여부 판단 IDamaga
-		print(parentObj.name);
+		# parentObj의 자식 노드 중 이름이 "Health"인 노드를 찾기
+		var health_node = parentObj.get_node_or_null("Health")
+		
+		if health_node != null:
+			# Health 노드가 있으면 TakeDamage 호출 (예: 10 데미지)
+			if health_node.has_method("TakeDamage"):
+				health_node.TakeDamage("Player", 10);
+		else:
+			print("%s는 Health 노드가 없습니다." % parentObj.name)
 
 
 func update_animation() -> void:
