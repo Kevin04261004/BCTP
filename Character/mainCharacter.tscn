@@ -1,13 +1,23 @@
-[gd_scene load_steps=49 format=3 uid="uid://dwc0l58w43i6y"]
+[gd_scene load_steps=59 format=3 uid="uid://dwc0l58w43i6y"]
 
-[ext_resource type="Script" uid="uid://bblkm0wjo84ak" path="res://classes/character.gd" id="1_c2n14"]
+[ext_resource type="Script" uid="uid://bblkm0wjo84ak" path="res://classes/player.gd" id="1_c2n14"]
 [ext_resource type="Texture2D" uid="uid://tll38ccr2jts" path="res://resources/knight/IDLE.png" id="1_lv3og"]
+[ext_resource type="Script" uid="uid://drlmt0ltssgv2" path="res://classes/StateMachine.gd" id="2_4e3tg"]
 [ext_resource type="Texture2D" uid="uid://cpfqbv7pynf3f" path="res://resources/knight/ATTACK 1.png" id="2_efxbq"]
-[ext_resource type="PackedScene" uid="uid://6jni1qqa7o3w" path="res://classes/health.tscn" id="2_nb58w"]
+[ext_resource type="PackedScene" uid="uid://6jni1qqa7o3w" path="res://classes/comp_health.tscn" id="2_nb58w"]
 [ext_resource type="Texture2D" uid="uid://b4nq238y8d82i" path="res://resources/knight/JUMP.png" id="3_7igyw"]
+[ext_resource type="Script" uid="uid://cmhwp637pa551" path="res://classes/MoveState.gd" id="3_ensk7"]
+[ext_resource type="Script" uid="uid://b800twytl0t8n" path="res://classes/IdleState.gd" id="3_g5w5n"]
 [ext_resource type="Texture2D" uid="uid://s1fm4ejuhkff" path="res://resources/knight/ATTACK 2.png" id="3_nb58w"]
 [ext_resource type="Texture2D" uid="uid://nbquo0ixybrr" path="res://resources/knight/WALK.png" id="3_slnnu"]
 [ext_resource type="Texture2D" uid="uid://uryiiqmcigo8" path="res://resources/knight/ATTACK 3.png" id="4_j2ds1"]
+[ext_resource type="Script" uid="uid://d4ku2jskm2c5g" path="res://classes/AttackState.gd" id="4_x7e7i"]
+[ext_resource type="Script" uid="uid://ojf033t8o1vq" path="res://classes/comp_health.gd" id="4_y428l"]
+[ext_resource type="Script" uid="uid://dgocuces5j6xp" path="res://Classes/JumpState.gd" id="6_xpxil"]
+[ext_resource type="PackedScene" uid="uid://emao3fmsubqk" path="res://classes/comp_animation.tscn" id="6_y428l"]
+[ext_resource type="Script" uid="uid://byttgbe0q7ao1" path="res://Classes/DeathState.gd" id="7_8e5bs"]
+[ext_resource type="Script" uid="uid://b76ovf20hq4pv" path="res://Classes/FallState.gd" id="8_8e5bs"]
+[ext_resource type="Script" uid="uid://cjvqrd54uccbn" path="res://classes/AttackComponent.gd" id="12_y428l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uf10s"]
 atlas = ExtResource("2_efxbq")
@@ -77,6 +87,10 @@ region = Rect2(384, 0, 96, 84)
 atlas = ExtResource("4_j2ds1")
 region = Rect2(480, 0, 96, 84)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwq5x"]
+atlas = ExtResource("3_7igyw")
+region = Rect2(192, 0, 96, 84)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_c2n14"]
 atlas = ExtResource("1_lv3og")
 region = Rect2(0, 0, 96, 84)
@@ -105,14 +119,6 @@ region = Rect2(480, 0, 96, 84)
 atlas = ExtResource("1_lv3og")
 region = Rect2(576, 0, 96, 84)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xpxil"]
-atlas = ExtResource("3_7igyw")
-region = Rect2(288, 0, 96, 84)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8e5bs"]
-atlas = ExtResource("3_7igyw")
-region = Rect2(384, 0, 96, 84)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_3gecw"]
 atlas = ExtResource("3_7igyw")
 region = Rect2(0, 0, 96, 84)
@@ -121,9 +127,13 @@ region = Rect2(0, 0, 96, 84)
 atlas = ExtResource("3_7igyw")
 region = Rect2(96, 0, 96, 84)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iwq5x"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpxil"]
 atlas = ExtResource("3_7igyw")
-region = Rect2(192, 0, 96, 84)
+region = Rect2(288, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8e5bs"]
+atlas = ExtResource("3_7igyw")
+region = Rect2(384, 0, 96, 84)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j2ds1"]
 atlas = ExtResource("3_slnnu")
@@ -227,6 +237,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_iwq5x")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_c2n14")
 }, {
 "duration": 1.0,
@@ -253,32 +271,24 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xpxil")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8e5bs")
-}],
-"loop": true,
-"name": &"jump_end",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_3gecw")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7by44")
 }],
 "loop": true,
-"name": &"jump_start",
+"name": &"jump",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iwq5x")
+"texture": SubResource("AtlasTexture_xpxil")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8e5bs")
 }],
 "loop": true,
-"name": &"on_air",
+"name": &"land",
 "speed": 5.0
 }, {
 "frames": [{
@@ -320,19 +330,47 @@ height = 40.0
 slide_on_ceiling = false
 script = ExtResource("1_c2n14")
 
-[node name="Health" parent="." instance=ExtResource("2_nb58w")]
+[node name="Comp_FSM" type="Node" parent="."]
+script = ExtResource("2_4e3tg")
+initial_state = NodePath("State_Idle")
+
+[node name="State_Idle" type="Node" parent="Comp_FSM"]
+script = ExtResource("3_g5w5n")
+
+[node name="State_Move" type="Node" parent="Comp_FSM"]
+script = ExtResource("3_ensk7")
+
+[node name="State_Attack" type="Node" parent="Comp_FSM"]
+script = ExtResource("4_x7e7i")
+
+[node name="State_Jump" type="Node" parent="Comp_FSM"]
+script = ExtResource("6_xpxil")
+
+[node name="State_Death" type="Node" parent="Comp_FSM"]
+script = ExtResource("7_8e5bs")
+
+[node name="State_Fall" type="Node" parent="Comp_FSM"]
+script = ExtResource("8_8e5bs")
+
+[node name="Comp_Health" parent="." instance=ExtResource("2_nb58w")]
+script = ExtResource("4_y428l")
+max_health = 100
+
+[node name="Comp_Animation" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("6_y428l")]
+anim = NodePath("../AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_q41tm")
-animation = &"attack01"
+animation = &"land"
 
 [node name="characterCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_j2ds1")
 
-[node name="AttackArea" type="Area2D" parent="."]
+[node name="Comp_Attack" type="Area2D" parent="."]
 monitorable = false
+script = ExtResource("12_y428l")
 
-[node name="attackCollision" type="CollisionShape2D" parent="AttackArea"]
+[node name="attackCollision" type="CollisionShape2D" parent="Comp_Attack"]
 position = Vector2(20, 0)
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_efxbq")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://6jni1qqa7o3w"]
+
+[sub_resource type="GDScript" id="GDScript_sngkj"]
+
+[node name="Comp_Health" type="Node"]
+script = SubResource("GDScript_sngkj")
