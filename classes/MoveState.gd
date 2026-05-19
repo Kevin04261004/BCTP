@@ -13,15 +13,24 @@ func physics_update(delta):
 	if dir == 0:
 		state_machine.change_state("State_Idle")
 		return;
-		
-	var is_running = Input.is_action_pressed("ui_run")
 	
 	var target_speed = walk_speed
 
-	if is_running:
+	if Input.is_action_pressed("ui_run"):
 		target_speed = run_speed
-		
 	
+	# 실제 속도 비율
+	var speed_ratio = abs(character.velocity.x) / run_speed
+
+	# 애니메이션 전환
+	if speed_ratio < 0.6:
+		character.get_node("Comp_Animation").play_state("walk")
+	else:
+		character.get_node("Comp_Animation").play_state("run")
+
+	# 애니메이션 재생 속도
+	character.get_node("AnimatedSprite2D").speed_scale = max(speed_ratio, 0.5) * 1.5
+		
 	character.velocity.x = dir * target_speed
 	
 	if dir != 0:

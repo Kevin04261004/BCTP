@@ -401,6 +401,8 @@ script = ExtResource("3_g5w5n")
 
 [node name="State_Move" type="Node" parent="Comp_FSM" unique_id=1238318766]
 script = ExtResource("3_ensk7")
+walk_speed = null
+run_speed = null
 
 [node name="State_Attack" type="Node" parent="Comp_FSM" unique_id=934866710]
 script = ExtResource("4_x7e7i")

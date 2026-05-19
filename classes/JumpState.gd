@@ -26,12 +26,10 @@ func physics_update(delta: float):
 	
 	# ----- 좌우 이동 (공중 제어) -----
 	var dir = Input.get_axis("ui_left", "ui_right")
-		
-	var is_running = Input.is_action_pressed("ui_run")
 	
 	var target_speed = air_control_walk_speed
 
-	if is_running:
+	if Input.is_action_pressed("ui_run"):
 		target_speed = air_control_run_speed
 		
 	
