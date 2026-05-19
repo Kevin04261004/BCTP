@@ -7,9 +7,9 @@ extends BaseState
 var timer := 0.0
 
 func enter(_msg := {}):
-	player.velocity = Vector2.ZERO
-	player.get_node("Comp_Animation").play_state("attack01")
-	player.get_node("Comp_Attack").PerformAttack()
+	character.velocity = Vector2.ZERO
+	character.get_node("Comp_Animation").play_state("attack01")
+	character.get_node("Comp_Attack").PerformAttack()
 	timer = 0.0
 
 func physics_update(delta):

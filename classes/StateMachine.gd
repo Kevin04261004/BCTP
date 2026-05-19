@@ -9,7 +9,7 @@ var states := {}
 func _ready():
 	for child in get_children():
 		if child is BaseState:
-			child.player = get_parent()
+			child.character = get_parent()
 			child.state_machine = self
 			states[child.name] = child
 	if initial_state != null:

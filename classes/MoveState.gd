@@ -1,21 +1,34 @@
 # MoveState.gd
 extends BaseState
 
-@export var speed: float = 100
+@export var walk_speed: float = 100
+@export var run_speed: float = 200
 
 func enter(_msg := {}):
-	player.get_node("Comp_Animation").play_state("walk")
+	character.get_node("Comp_Animation").play_state("walk")
 
 func physics_update(delta):
 	var dir = Input.get_axis("ui_left", "ui_right")
+	
 	if dir == 0:
 		state_machine.change_state("State_Idle")
 		return;
-	player.velocity.x = dir * speed
+		
+	var is_running = Input.is_action_pressed("ui_run")
+	
+	var target_speed = walk_speed
+
+	if is_running:
+		target_speed = run_speed
+		
+	
+	character.velocity.x = dir * target_speed
+	
 	if dir != 0:
-		player.get_node("AnimatedSprite2D").scale.x = sign(dir)
-	player.velocity.y += ProjectSettings.get_setting("physics/2d/default_gravity") * delta
-	player.move_and_slide()
+		character.get_node("AnimatedSprite2D").scale.x = sign(dir)
+		
+	character.velocity.y += ProjectSettings.get_setting("physics/2d/default_gravity") * delta
+	character.move_and_slide()
 
 func handle_input(event):
 	if Input.is_action_pressed("ui_jump"):
