@@ -77,3 +77,14 @@ func _flip_character(dir: int):
 	wall_raycast.scale.x = dir
 	ground_raycast.scale.x = dir
 	target_raycast.scale.x = dir
+	
+	# 2. 벽 및 바닥 감지 레이캐스트 반전
+	# scale.x를 1 또는 -1로 만들어 레이캐스트가 뻗어나가는 방향을 통째로 돌립니다.
+	if wall_raycast:
+		wall_raycast.scale.x = dir
+	if ground_raycast:
+		ground_raycast.scale.x = dir
+		
+	# 3. 타겟 감지 레이캐스트도 같이 돌려줍니다.
+	if target_raycast:
+		target_raycast.scale.x = dir

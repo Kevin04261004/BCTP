@@ -281,10 +281,12 @@ metadata/_custom_type_script = "uid://bg8urqjugkx8b"
 
 [node name="State_Patrol" type="Node" parent="Comp_FSM" unique_id=420620897]
 script = ExtResource("4_5fm3r")
+normal_speed = 500.0
 metadata/_custom_type_script = "uid://bg8urqjugkx8b"
 
 [node name="State_ChaseTarget" type="Node" parent="Comp_FSM" unique_id=39206256]
 script = ExtResource("5_5fm3r")
+chase_speed = 500.0
 metadata/_custom_type_script = "uid://bg8urqjugkx8b"
 
 [node name="Comp_Animation" parent="." unique_id=1732968814 node_paths=PackedStringArray("anim") instance=ExtResource("1_asg1k")]
