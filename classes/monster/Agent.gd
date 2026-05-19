@@ -1,6 +1,6 @@
 # character.gd
 extends CharacterBody2D
-class_name character
+class_name MonsterAgent2D
 
 @onready var state_machine = $Comp_FSM
 @onready var health = $Comp_Health
@@ -10,5 +10,3 @@ func _ready():
 
 func _on_character_died(owner):
 	state_machine.change_state("State_Death")
-
-# 김도윤 바보

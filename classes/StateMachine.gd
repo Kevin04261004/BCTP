@@ -9,14 +9,15 @@ var states := {}
 func _ready():
 	for child in get_children():
 		if child is BaseState:
-			child.player = get_parent()
+			child.character = get_parent()
 			child.state_machine = self
 			states[child.name] = child
 	if initial_state != null:
 		change_state(initial_state)
 
 func change_state(state_name: String, msg := {}):
-	print("to " + state_name);
+	var parentName = get_parent().name
+	print(parentName + " to " + state_name);
 	if current_state:
 		current_state.exit()
 	current_state = states[state_name]

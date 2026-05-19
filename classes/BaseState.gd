@@ -2,7 +2,7 @@
 extends Node
 class_name BaseState
 
-var player: CharacterBody2D
+var character : CharacterBody2D
 var state_machine: Node
 
 func enter(_msg := {}): pass

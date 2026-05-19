@@ -2,5 +2,5 @@
 extends BaseState
 
 func enter(_msg := {}):
-	player.get_node("Comp_Animation").play_state("death")
-	player.velocity = Vector2.ZERO
+	character.get_node("Comp_Animation").play_state("death")
+	character.velocity = Vector2.ZERO
