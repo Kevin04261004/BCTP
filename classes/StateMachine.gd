@@ -16,7 +16,8 @@ func _ready():
 		change_state(initial_state)
 
 func change_state(state_name: String, msg := {}):
-	print("to " + state_name);
+	var parentName = get_parent().name
+	print(parentName + " to " + state_name);
 	if current_state:
 		current_state.exit()
 	current_state = states[state_name]
