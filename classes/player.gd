@@ -10,3 +10,5 @@ func _ready():
 
 func _on_player_died(owner):
 	state_machine.change_state("State_Death")
+
+# 김도윤 바보
