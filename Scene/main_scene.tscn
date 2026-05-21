@@ -2,24 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://dwc0l58w43i6y" path="res://prefab/character/Hero/Theif.tscn" id="1_fb1ex"]
 [ext_resource type="PackedScene" uid="uid://dvo5wsrwk0ul1" path="res://background/floor_test.tscn" id="2_4wnd8"]
-[ext_resource type="PackedScene" uid="uid://cur35m2h0ceuq" path="res://prefab/character/Enemy/MartialSamurai.tscn" id="3_x5n27"]
 
 [node name="MainScene" type="Node2D" unique_id=1157104015]
 
-[node name="Player" parent="." unique_id=1946116183 instance=ExtResource("1_fb1ex")]
+[node name="Theif" parent="." unique_id=1946116183 instance=ExtResource("1_fb1ex")]
 position = Vector2(3, -20)
 
-[node name="State_Move" parent="Player/Comp_FSM" parent_id_path=PackedInt32Array(1946116183, 140840068) index="1" unique_id=1238318766]
-walk_speed = null
-run_speed = null
-
-[node name="State_Jump" parent="Player/Comp_FSM" parent_id_path=PackedInt32Array(1946116183, 140840068) index="3" unique_id=722152958]
-jump_force = null
-air_control_walk_speed = null
-air_control_run_speed = null
-coyote_time = null
-
-[node name="State_Fall" parent="Player/Comp_FSM" parent_id_path=PackedInt32Array(1946116183, 140840068) index="5" unique_id=1883027110]
+[node name="State_Fall" parent="Theif/Comp_FSM" parent_id_path=PackedInt32Array(1946116183, 140840068) index="5" unique_id=1883027110]
 fall_speed_multiplier = null
 air_control_walk_speed = null
 air_control_run_speed = null
@@ -31,7 +20,4 @@ min_fall_velocity = null
 position = Vector2(1, 78)
 scale = Vector2(7.1171875, 0.25000003)
 
-[node name="monster" parent="." unique_id=529791284 instance=ExtResource("3_x5n27")]
-position = Vector2(276, 43)
-
-[editable path="Player"]
+[editable path="Theif"]

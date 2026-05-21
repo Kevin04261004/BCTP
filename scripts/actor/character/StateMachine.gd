@@ -6,11 +6,13 @@ class_name StateMachine
 var current_state: BaseState
 var states := {}
 
-func _ready():
+func _initialize(owner):
 	for child in get_children():
 		if child is BaseState:
-			child.character = get_parent()
+			child.root = owner
+			assert(child.root != null, "child.root is null")
 			child.state_machine = self
+			assert(child.state_machine != null, "child.state_machine is null")
 			states[child.name] = child
 	if initial_state != null:
 		change_state(initial_state)

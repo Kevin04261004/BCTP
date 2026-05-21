@@ -15,9 +15,9 @@ func _ready():
 # Gravity
 # =========================
 
-func apply_gravity(delta: float):
+func apply_gravity(delta: float, multiplier: float = 1.0):
 	if not actor.is_on_floor():
-		actor.velocity.y += gravity * delta
+		actor.velocity.y += (gravity * multiplier * delta)
 	else:
 		actor.velocity.y = 0
 

@@ -1,46 +1,38 @@
 # MoveState.gd
-extends BaseState
-
-@export var walk_speed: float = 100
-@export var run_speed: float = 200
-
-func enter(_msg := {}):
-	character.get_node("Comp_Animation").play_state("walk")
+extends HeroBaseState
 
 func physics_update(delta):
-	var dir = Input.get_axis("ui_left", "ui_right")
-	
+	var dir := Input.get_axis("ui_left","ui_right")
+
 	if dir == 0:
 		state_machine.change_state("State_Idle")
-		return;
-	
-	var target_speed = walk_speed
+		return
+
+	var target_speed := (root.stat_data.move_speed)
 
 	if Input.is_action_pressed("ui_run"):
-		target_speed = run_speed
-	
-	# 실제 속도 비율
-	var speed_ratio = abs(character.velocity.x) / run_speed
+		target_speed = (root.stat_data.run_speed)
 
-	# 애니메이션 전환
+	root.movement_component.apply_gravity(delta)
+	root.movement_component.turn(sign(dir))
+	root.movement_component.move(dir, target_speed)
+
+	root.movement_component.apply()
+
+	# TODO: 버그 수정
+	var speed_ratio = 1 #(abs(root.velocity.x) / root.stat_data.move_speed)
+
 	if speed_ratio < 0.6:
-		character.get_node("Comp_Animation").play_state("walk")
+		root.animation_component.play_state("walk")
 	else:
-		character.get_node("Comp_Animation").play_state("run")
+		root.animation_component.play_state("run")
 
-	# 애니메이션 재생 속도
-	character.get_node("AnimatedSprite2D").speed_scale = max(speed_ratio, 0.5) * 1.5
-		
-	character.velocity.x = dir * target_speed
-	
-	if dir != 0:
-		character.get_node("AnimatedSprite2D").scale.x = sign(dir)
-		
-	character.velocity.y += ProjectSettings.get_setting("physics/2d/default_gravity") * delta
-	character.move_and_slide()
+	# root.animation_component.set_speed(max(speed_ratio, 0.5) * 1.5)
+
 
 func handle_input(event):
-	if Input.is_action_pressed("ui_jump"):
+	if event.is_action_pressed("ui_jump"):
 		state_machine.change_state("State_Jump")
-	if Input.is_action_pressed("ui_attack"):
+
+	if event.is_action_pressed("ui_attack"):
 		state_machine.change_state("State_Attack")

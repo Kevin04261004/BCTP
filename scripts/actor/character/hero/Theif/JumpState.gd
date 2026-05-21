@@ -1,52 +1,55 @@
 # JumpState.gd
-extends BaseState
+extends HeroBaseState
 
-@export var jump_force : float = 400
-@export var air_control_walk_speed : float = 100   # 점프 상승 중 좌우 이동 속도
-@export var air_control_run_speed : float = 200 
-@export var coyote_time : float = 0.1        # 코요테 타임 (선택)
+# =========================
+# Settings
+# =========================
 
-var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
-var _coyote_timer : float = 0.0
+@export var coyote_time: float = 0.1
 
-func enter(_msg := {}):
-	# 점프 입력이 들어온 순간
-	character.velocity.y = -jump_force
-	character.get_node("Comp_Animation").play_state("jump")
-	
-	# 코요테 타이머 초기화
-	_coyote_timer = coyote_time if _msg.get("coyote", false) else 0.0
+# =========================
+# Internal
+# =========================
+
+var coyote_timer: float = 0.0
+
+# =========================
+# Lifecycle
+# =========================
+
+func enter(msg := {}):
+	root.movement_component.jump(root.stat_data.jump_force)
+	root.animation_component.play_state("jump")
+
+	coyote_timer = (coyote_time if msg.get("coyote", false) else 0.0)
+
+# =========================
+# Physics
+# =========================
 
 func physics_update(delta: float):
-	# ----- 코요테 타임 처리 (절벽에서 살짝 떨어진 뒤에도 점프 가능) -----
-	if _coyote_timer > 0:
-		_coyote_timer -= delta
-		if character.is_on_floor():
-			_coyote_timer = 0.0   # 바닥에 닿으면 즉시 종료
-	
-	# ----- 좌우 이동 (공중 제어) -----
-	var dir = Input.get_axis("ui_left", "ui_right")
-	
-	var target_speed = air_control_walk_speed
+	root.movement_component.apply_gravity(delta)
 
-	if Input.is_action_pressed("ui_run"):
-		target_speed = air_control_run_speed
-		
-	
-	character.velocity.x = dir * target_speed
+	var dir := Input.get_axis("ui_left", "ui_right")
+	var move_speed := (root.stat_data.move_speed)
+	root.movement_component.move(dir, move_speed)
+
 	if dir != 0:
-		character.get_node("AnimatedSprite2D").scale.x = sign(dir)
-	# ----- 중력 -----
-	character.velocity.y += gravity * delta
-	
-	character.move_and_slide()
-	
-	# ----- 정점 도달 → FallState 로 전환 -----
-	if character.velocity.y >= 0:   # 상승 끝, 하강 시작
+		root.movement_component.turn(sign(dir))
+
+	root.movement_component.apply()
+
+
+	if coyote_timer > 0:
+		coyote_timer -= delta
+		if root.is_on_floor():
+			coyote_timer = 0.0
+
+	if root.velocity.y >= 0:
 		state_machine.change_state("State_Fall")
-	
-	# ----- 착지 (코요테 타임 중에도) -----
-	if character.is_on_floor():
-		character.get_node("Comp_Animation").play_state("land")
-		var target_state = "State_Walk" if dir != 0 else "State_Idle"
-		state_machine.change_state(target_state)
+		return
+
+	if root.is_on_floor():
+		root.animation_component.play_state("State_Idle")
+		var next_state := ("State_Walk" if dir != 0 else "State_Idle")
+		state_machine.change_state(next_state)

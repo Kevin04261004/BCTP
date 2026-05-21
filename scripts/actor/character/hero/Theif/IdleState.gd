@@ -1,13 +1,18 @@
 # IdleState.gd
-extends BaseState
+extends HeroBaseState
 
 func enter(_msg := {}):
-	character.velocity = Vector2.ZERO
-	character.get_node("Comp_Animation").play_state("idle")
+	if (root == null):
+		print("Root is null")
+	if (root.movement_component == null):
+		print("Root.movement_component is null")
+		
+	root.movement_component.stop_all()
+	root.animation_component.play_state("idle")
 
 func physics_update(delta):
-	character.velocity.y += ProjectSettings.get_setting("physics/2d/default_gravity") * delta
-	character.move_and_slide()
+	root.movement_component.apply_gravity(delta)
+	root.movement_component.apply()
 
 func handle_input(event):
 	if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_run") and Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_run") and Input.is_action_pressed("ui_right"):

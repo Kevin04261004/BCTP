@@ -13,3 +13,4 @@ class_name HeroBaseState
 
 func setup():
 	super()
+	

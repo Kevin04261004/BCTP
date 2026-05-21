@@ -1,8 +1,5 @@
 [gd_scene format=3 uid="uid://cur35m2h0ceuq"]
 
-[ext_resource type="PackedScene" path="res://scripts/comp_animation.tscn" id="1_asg1k"]
-[ext_resource type="Script" path="res://scripts/monster/Agent.gd" id="1_pteax"]
-[ext_resource type="PackedScene" path="res://scripts/comp_health.tscn" id="1_q1r28"]
 [ext_resource type="Script" uid="uid://drlmt0ltssgv2" path="res://scripts/actor/character/StateMachine.gd" id="2_8gq03"]
 [ext_resource type="Script" uid="uid://7q1mgffjhaac" path="res://scripts/actor/character/enemy/MartialSamurai/FSM/IdleState.gd" id="3_8gq03"]
 [ext_resource type="Texture2D" uid="uid://drerfxrualgcn" path="res://sprites/Martial Samurai/Attack1.png" id="3_xsxdi"]
@@ -269,7 +266,6 @@ height = 60.0
 
 [node name="monster" type="CharacterBody2D" unique_id=125012825]
 slide_on_ceiling = false
-script = ExtResource("1_pteax")
 
 [node name="Comp_FSM" type="Node" parent="." unique_id=1466402200]
 script = ExtResource("2_8gq03")
@@ -281,18 +277,12 @@ metadata/_custom_type_script = "uid://bg8urqjugkx8b"
 
 [node name="State_Patrol" type="Node" parent="Comp_FSM" unique_id=420620897]
 script = ExtResource("4_5fm3r")
-normal_speed = 500.0
 metadata/_custom_type_script = "uid://bg8urqjugkx8b"
 
 [node name="State_ChaseTarget" type="Node" parent="Comp_FSM" unique_id=39206256]
 script = ExtResource("5_5fm3r")
 chase_speed = 500.0
 metadata/_custom_type_script = "uid://bg8urqjugkx8b"
-
-[node name="Comp_Animation" parent="." unique_id=1732968814 node_paths=PackedStringArray("anim") instance=ExtResource("1_asg1k")]
-anim = NodePath("../AnimatedSprite2D")
-
-[node name="Comp_Health" parent="." unique_id=1702033979 instance=ExtResource("1_q1r28")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=88529637]
 sprite_frames = SubResource("SpriteFrames_q41tm")
