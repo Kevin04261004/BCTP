@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StageGroupData" format=3 uid="uid://dd5xm4fdvjivy"]
+
+[ext_resource type="Script" uid="uid://c7ri1b07v4da" path="res://scripts/resource_script/scene/StageGroupData.gd" id="1_a0dfc"]
+[ext_resource type="PackedScene" uid="uid://dhbt2thdwl1p0" path="res://Scene/World/Stage1/Stage1_Boss_BossName.tscn" id="1_ehlw2"]
+[ext_resource type="PackedScene" uid="uid://cjbj2735jfh2c" path="res://Scene/World/Stage1/Stage1_Normal_A.tscn" id="2_t75om"]
+[ext_resource type="PackedScene" uid="uid://cppvgrlp3itu6" path="res://Scene/World/Stage1/Stage1_Normal_B.tscn" id="3_bq1y8"]
+[ext_resource type="PackedScene" uid="uid://dw0f85eledsi" path="res://Scene/World/Stage1/Stage1_Normal_C.tscn" id="4_m6j86"]
+
+[resource]
+script = ExtResource("1_a0dfc")
+normal_stages = Array[PackedScene]([ExtResource("2_t75om"), ExtResource("3_bq1y8"), ExtResource("4_m6j86")])
+boss_stage = ExtResource("1_ehlw2")
+metadata/_custom_type_script = "uid://c7ri1b07v4da"

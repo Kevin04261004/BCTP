@@ -18,8 +18,6 @@ func _ready():
 func apply_gravity(delta: float, multiplier: float = 1.0):
 	if not actor.is_on_floor():
 		actor.velocity.y += (gravity * multiplier * delta)
-	else:
-		actor.velocity.y = 0
 
 # =========================
 # Move
@@ -43,8 +41,7 @@ func turn(direction: int = 0):
 # =========================
 
 func jump(force: float):
-	if actor.is_on_floor():
-		actor.velocity.y = -force
+	actor.velocity.y = -force
 
 # =========================
 # Stop

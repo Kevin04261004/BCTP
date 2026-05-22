@@ -2,11 +2,6 @@
 extends HeroBaseState
 
 func enter(_msg := {}):
-	if (root == null):
-		print("Root is null")
-	if (root.movement_component == null):
-		print("Root.movement_component is null")
-		
 	root.movement_component.stop_all()
 	root.animation_component.play_state("idle")
 

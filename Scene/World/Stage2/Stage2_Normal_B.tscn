@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dnvjdy1glsbru"]
+
+[ext_resource type="PackedScene" uid="uid://dvo5wsrwk0ul1" path="res://prefab/props/floor_test.tscn" id="1_l1obm"]
+
+[node name="Stage1B" type="Node2D" unique_id=1313484692]
+
+[node name="floor_test" parent="." unique_id=1088818016 instance=ExtResource("1_l1obm")]
+position = Vector2(0, 17)
+scale = Vector2(5, 0.25)
+
+[node name="floor_test2" parent="." unique_id=759906185 instance=ExtResource("1_l1obm")]
+position = Vector2(225.49997, -16.750015)
+scale = Vector2(1.5078129, 0.22265607)
+
+[node name="floor_test3" parent="." unique_id=507963211 instance=ExtResource("1_l1obm")]
+position = Vector2(-474, 16)
+scale = Vector2(1.5078129, 0.22265607)

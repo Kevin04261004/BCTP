@@ -7,12 +7,7 @@ class_name HeroStat
 # =========================
 
 @export var jump_force: float = 350.0
-
-# =========================
-# Movement
-# =========================
-
-@export var run_speed: float = 150.0
+@export var inair_speed: float = 100.0
 
 # =========================
 # Dash

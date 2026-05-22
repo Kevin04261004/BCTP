@@ -4,5 +4,7 @@
 
 [resource]
 script = ExtResource("1_2e7nk")
+inair_speed = 150.0
 display_name = "Theif"
+move_speed = 125.0
 metadata/_custom_type_script = "uid://dcv41hg0w7ap6"
