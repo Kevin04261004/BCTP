@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cu5thufo505lj" path="res://scripts/scene/Gameplay.gd" id="1_5yss5"]
 [ext_resource type="Script" uid="uid://2klbrulhyxic" path="res://scripts/scene/WorldLoader.gd" id="3_nl81e"]
 [ext_resource type="Resource" uid="uid://dd5xm4fdvjivy" path="res://resources/stage/Stage1.tres" id="4_7q0hh"]
+[ext_resource type="Resource" uid="uid://dcil32juql4y4" path="res://resources/stage/Stage0.tres" id="4_gi2oe"]
 [ext_resource type="Script" uid="uid://c7ri1b07v4da" path="res://scripts/resource_script/scene/StageGroupData.gd" id="4_jejs5"]
 [ext_resource type="PackedScene" uid="uid://b2x0nixxucp4u" path="res://Scene/Manager.tscn" id="5_1scxe"]
 [ext_resource type="Resource" uid="uid://dn6tropt7fieh" path="res://resources/stage/Stage2.tres" id="5_gi2oe"]
@@ -14,7 +15,7 @@ script = ExtResource("1_5yss5")
 
 [node name="World" type="Node2D" parent="." unique_id=1015282740]
 script = ExtResource("3_nl81e")
-stage_groups = Array[ExtResource("4_jejs5")]([ExtResource("4_7q0hh"), ExtResource("5_gi2oe")])
+stage_groups = Array[ExtResource("4_jejs5")]([ExtResource("4_gi2oe"), ExtResource("4_7q0hh"), ExtResource("5_gi2oe")])
 
 [node name="Manager" parent="." unique_id=567968382 instance=ExtResource("5_1scxe")]
 

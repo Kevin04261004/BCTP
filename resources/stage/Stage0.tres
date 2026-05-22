@@ -6,4 +6,5 @@
 [resource]
 script = ExtResource("1_egmdi")
 normal_stages = Array[PackedScene]([ExtResource("1_q6gxh")])
+required_stage_count = 1
 metadata/_custom_type_script = "uid://c7ri1b07v4da"
