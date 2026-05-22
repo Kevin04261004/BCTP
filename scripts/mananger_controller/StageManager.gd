@@ -1,8 +1,9 @@
-# World.gd
-extends Node2D
-class_name WorldLoader
+# StageManager.gd
+extends Singleton
+class_name StageManager
 
 @export var stage_groups: Array[StageGroupData]
+@export var world: Node2D
 
 var current_stage: Node
 
@@ -72,16 +73,22 @@ func load_next_stage():
 	start_group()
 
 func load_stage(stage_scene: PackedScene):
-
-	assert(stage_scene != null,
-		"[World] stage_scene is null.")
+	assert(stage_scene != null, "[World] stage_scene is null.")
 
 	if current_stage != null:
 		current_stage.queue_free()
 
 	current_stage = stage_scene.instantiate()
 
-	add_child(current_stage)
+	world.add_child(current_stage)
+	reset_player_position()
+
+func reset_player_position():
+	var player: Character = (CharacterManager.instance.get_player())
+	if player == null:
+		return
+
+	player.global_position = Vector2.ZERO
 
 func game_clear():
 	print("GAME CLEAR")
