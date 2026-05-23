@@ -7,9 +7,9 @@ class_name SensorComponent
 
 var actor: CharacterBody2D
 
-var wall_raycast: RayCast2D
-var ground_raycast: RayCast2D
-var target_raycast: RayCast2D
+@export var wall_raycast: RayCast2D
+@export var ground_raycast: RayCast2D
+@export var target_raycast: RayCast2D
 
 # =========================
 # Lifecycle
@@ -17,9 +17,6 @@ var target_raycast: RayCast2D
 
 func _ready():
 	actor = get_parent()
-	wall_raycast = actor.get_node_or_null("SpriteRoot/WallRaycast2D")
-	ground_raycast = actor.get_node_or_null("SpriteRoot/GroundRaycast2D")
-	target_raycast = actor.get_node_or_null("SpriteRoot/FindTargetRaycast2D")
 
 # =========================
 # Wall

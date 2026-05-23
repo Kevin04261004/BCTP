@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dwc0l58w43i6y"]
 
-[ext_resource type="Script" uid="uid://bblkm0wjo84ak" path="res://BCTP/scripts/actor/character/character.gd" id="1_c2n14"]
+[ext_resource type="Script" uid="uid://b6kqidjogglad" path="res://BCTP/scripts/actor/character/hero/Hero.gd" id="1_2i137"]
 [ext_resource type="Texture2D" uid="uid://tll38ccr2jts" path="res://BCTP/sprites/knight/IDLE.png" id="1_lv3og"]
 [ext_resource type="Script" uid="uid://drlmt0ltssgv2" path="res://BCTP/scripts/actor/character/StateMachine.gd" id="2_4e3tg"]
 [ext_resource type="Resource" uid="uid://sjdae85xoetf" path="res://BCTP/resources/stat/Hero/Thief/TheifStatData.tres" id="2_5g8l5"]
@@ -397,7 +397,7 @@ func enter(_msg := {}):
 
 [node name="mainCharacter" type="CharacterBody2D" unique_id=884894237]
 slide_on_ceiling = false
-script = ExtResource("1_c2n14")
+script = ExtResource("1_2i137")
 stat_data = ExtResource("2_5g8l5")
 
 [node name="characterCollision" type="CollisionShape2D" parent="." unique_id=1671782306]

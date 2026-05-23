@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://crd0o8wrb2egm" path="res://BCTP/scripts/mananger_controller/CharacterManager.gd" id="9_2t23o"]
 [ext_resource type="Script" uid="uid://cd8140ieebxtx" path="res://BCTP/scripts/mananger_controller/PlayerController.gd" id="10_33nw5"]
 [ext_resource type="PackedScene" uid="uid://cew8k1smnvi3p" path="res://BCTP/prefab/character/Hero/Theif2.tscn" id="11_2t23o"]
+[ext_resource type="Script" uid="uid://fofr03l4mhll" path="res://BCTP/scripts/StoreSystem.gd" id="13_mt60v"]
 
 [node name="Gameplay" type="Node2D" unique_id=1157104015]
 
@@ -44,3 +45,8 @@ script = ExtResource("10_33nw5")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=729134844]
 zoom = Vector2(1.75, 1.75)
+
+[node name="Store" type="Node2D" parent="." unique_id=1008558229]
+
+[node name="StoreSystem" type="Node" parent="Store" unique_id=591413744]
+script = ExtResource("13_mt60v")

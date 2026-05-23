@@ -64,6 +64,11 @@ ui_debug_next_stage={
 ]
 }
 
+[limbo_ai]
+
+behavior_tree/behavior_tree_default_dir="res://BCTP/ai/trees"
+behavior_tree/user_task_dirs=PackedStringArray("res://BCTP/ai/tasks")
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

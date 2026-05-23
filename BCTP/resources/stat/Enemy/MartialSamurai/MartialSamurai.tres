@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="EnemyStat" format=3 uid="uid://c2uewsj2a7ude"]
+
+[ext_resource type="Script" uid="uid://c6fkcbvrehm3a" path="res://BCTP/scripts/resource_script/stat/EnemyStat.gd" id="1_huvvv"]
+
+[resource]
+script = ExtResource("1_huvvv")
+metadata/_custom_type_script = "uid://c6fkcbvrehm3a"

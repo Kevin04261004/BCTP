@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cur35m2h0ceuq"]
 
+[ext_resource type="Script" uid="uid://s0q3sh33hs0q" path="res://BCTP/scripts/actor/character/enemy/OnGroundEnemy.gd" id="1_fq7sn"]
 [ext_resource type="BehaviorTree" uid="uid://cuqq60kkki04q" path="res://BCTP/ai/trees/MartialSamurai.tres" id="1_rytw3"]
+[ext_resource type="Resource" uid="uid://c2uewsj2a7ude" path="res://BCTP/resources/stat/Enemy/MartialSamurai/MartialSamurai.tres" id="2_fq7sn"]
 [ext_resource type="Texture2D" uid="uid://drerfxrualgcn" path="res://BCTP/sprites/Martial Samurai/Attack1.png" id="3_xsxdi"]
 [ext_resource type="Texture2D" uid="uid://i3or1v5mk7vr" path="res://BCTP/sprites/Martial Samurai/Attack2.png" id="4_pteax"]
 [ext_resource type="Texture2D" uid="uid://bxuw87fyhaelf" path="res://BCTP/sprites/Martial Samurai/Idle.png" id="5_ojjeg"]
@@ -9,8 +11,16 @@
 [ext_resource type="Texture2D" uid="uid://bdt8f0q2v8mtk" path="res://BCTP/sprites/Martial Samurai/Jump.png" id="7_iihen"]
 [ext_resource type="Texture2D" uid="uid://cr88dsww78cij" path="res://BCTP/sprites/Martial Samurai/Take hit.png" id="9_5fm3r"]
 [ext_resource type="Texture2D" uid="uid://de688bpf1103o" path="res://BCTP/sprites/Martial Samurai/Run.png" id="10_jtg5q"]
+[ext_resource type="Script" uid="uid://dft2nfhgyf5dm" path="res://BCTP/scripts/actor/character/enemy/MartialSamurai/SensorComponent.gd" id="10_xrtah"]
+[ext_resource type="Script" uid="uid://37in8v5ejky5" path="res://BCTP/scripts/actor/character/MovementComponent.gd" id="11_k57be"]
+[ext_resource type="Script" uid="uid://c4ukbajxf3y2s" path="res://BCTP/scripts/actor/AnimationComponent.gd" id="13_fq7sn"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_6hapl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j2ds1"]
+height = 60.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8gq03"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mmxpw"]
 atlas = ExtResource("3_xsxdi")
@@ -72,30 +82,6 @@ region = Rect2(0, 0, 200, 200)
 atlas = ExtResource("7_iihen")
 region = Rect2(200, 0, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iwq5x"]
-atlas = ExtResource("6_ojjeg")
-region = Rect2(192, 0, 96, 84)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_utygg"]
-atlas = ExtResource("6_8gq03")
-region = Rect2(0, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0thj3"]
-atlas = ExtResource("6_8gq03")
-region = Rect2(200, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_su3cp"]
-atlas = ExtResource("9_5fm3r")
-region = Rect2(0, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vpj51"]
-atlas = ExtResource("9_5fm3r")
-region = Rect2(200, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a7o35"]
-atlas = ExtResource("9_5fm3r")
-region = Rect2(400, 0, 200, 200)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_2t2gt"]
 atlas = ExtResource("10_jtg5q")
 region = Rect2(0, 0, 200, 200)
@@ -127,6 +113,30 @@ region = Rect2(1200, 0, 200, 200)
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3mbc"]
 atlas = ExtResource("10_jtg5q")
 region = Rect2(1400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwq5x"]
+atlas = ExtResource("6_ojjeg")
+region = Rect2(192, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utygg"]
+atlas = ExtResource("6_8gq03")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0thj3"]
+atlas = ExtResource("6_8gq03")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_su3cp"]
+atlas = ExtResource("9_5fm3r")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpj51"]
+atlas = ExtResource("9_5fm3r")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7o35"]
+atlas = ExtResource("9_5fm3r")
+region = Rect2(400, 0, 200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q41tm"]
 animations = [{
@@ -202,6 +212,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_2t2gt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivk1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnttm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxscl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jan5d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_la4ku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mehyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3mbc")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_iwq5x")
 }, {
 "duration": 1.0,
@@ -227,67 +266,51 @@ animations = [{
 "loop": true,
 "name": &"on_attack",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2t2gt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ivk1q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jnttm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jxscl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jan5d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_la4ku")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mehyo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t3mbc")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
 }]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j2ds1"]
-height = 60.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_8gq03"]
 
 [node name="MartialSamurai" type="CharacterBody2D" unique_id=125012825]
 slide_on_ceiling = false
+script = ExtResource("1_fq7sn")
+stat_data = ExtResource("2_fq7sn")
 
 [node name="BTPlayer" type="BTPlayer" parent="." unique_id=1857703944]
 behavior_tree = ExtResource("1_rytw3")
 blackboard_plan = SubResource("BlackboardPlan_6hapl")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=551142130]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=88529637]
-sprite_frames = SubResource("SpriteFrames_q41tm")
-animation = &"attack01"
-
 [node name="characterCollision" type="CollisionShape2D" parent="." unique_id=1010406740]
 shape = SubResource("CapsuleShape2D_j2ds1")
 
-[node name="AttackArea" type="Area2D" parent="." unique_id=444318043]
+[node name="SpriteRoot" type="Node2D" parent="." unique_id=1775290210]
 
-[node name="attackCollision" type="CollisionShape2D" parent="AttackArea" unique_id=2040210890]
+[node name="AttackArea" type="Area2D" parent="SpriteRoot" unique_id=444318043]
+
+[node name="attackCollision" type="CollisionShape2D" parent="SpriteRoot/AttackArea" unique_id=2040210890]
 position = Vector2(20, 1)
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_8gq03")
 
-[node name="WallRaycast2D" type="RayCast2D" parent="." unique_id=99833805]
+[node name="WallRaycast2D" type="RayCast2D" parent="SpriteRoot" unique_id=99833805]
 target_position = Vector2(25, 0)
 
-[node name="CheckGroundRaycast2D" type="RayCast2D" parent="." unique_id=1017664073]
+[node name="CheckGroundRaycast2D" type="RayCast2D" parent="SpriteRoot" unique_id=1017664073]
 position = Vector2(10, 0)
+
+[node name="FindTargetRaycast2D" type="RayCast2D" parent="SpriteRoot" unique_id=1440383426]
+target_position = Vector2(150, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteRoot" unique_id=88529637]
+sprite_frames = SubResource("SpriteFrames_q41tm")
+animation = &"move"
+
+[node name="Comp_Sensor" type="Node" parent="." unique_id=1785003273 node_paths=PackedStringArray("wall_raycast", "ground_raycast", "target_raycast")]
+script = ExtResource("10_xrtah")
+wall_raycast = NodePath("../SpriteRoot/WallRaycast2D")
+ground_raycast = NodePath("../SpriteRoot/CheckGroundRaycast2D")
+target_raycast = NodePath("../SpriteRoot/FindTargetRaycast2D")
+
+[node name="Comp_Movement" type="Node" parent="." unique_id=344421595]
+script = ExtResource("11_k57be")
+
+[node name="Comp_Animation" type="Node" parent="." unique_id=1499185180 node_paths=PackedStringArray("anim")]
+script = ExtResource("13_fq7sn")
+anim = NodePath("../SpriteRoot/AnimatedSprite2D")

@@ -26,14 +26,18 @@ func apply_gravity(delta: float, multiplier: float = 1.0):
 func move(direction: float, speed: float):
 	actor.velocity.x = (direction * speed)
 
+func get_direction() -> float:
+	return facing_direction
+
 func turn(direction: int = 0):
 	if direction == facing_direction:
 		return
 
 	if direction == 0:
 		facing_direction *= -1
-
-	facing_direction = direction
+	else:
+		facing_direction = direction
+	
 	sprite_root.scale.x = facing_direction
 
 # =========================

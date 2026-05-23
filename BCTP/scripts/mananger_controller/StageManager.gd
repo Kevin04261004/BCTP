@@ -22,7 +22,6 @@ func _unhandled_input(event):
 		load_next_stage()
 
 func start_group():
-
 	if current_group_index >= stage_groups.size():
 		game_clear()
 		return
@@ -37,7 +36,6 @@ func start_group():
 	load_next_stage()
 
 func load_next_stage():
-
 	if current_group_index >= stage_groups.size():
 		game_clear()
 		return

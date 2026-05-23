@@ -2,8 +2,6 @@
 extends CharacterBody2D
 class_name Character
 
-@onready var state_machine = $Comp_FSM
-
 # =========================
 # Components
 # =========================
@@ -18,5 +16,3 @@ func _ready():
 	animation_component = get_node_or_null("Comp_Animation")
 	assert(animation_component != null, "[Character] Comp_Animation not found.")
 	assert(stat_data != null, "[Character] stat_data not found.")
-	
-	state_machine._initialize(self)

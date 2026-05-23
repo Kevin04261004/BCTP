@@ -10,13 +10,10 @@ class_name CharacterManager
 var current_character: Character
 
 func _ready():
-
 	super()
-
 	spawn_default_character()
 
 func spawn_default_character():
-
 	assert(
 		playable_characters.size() > 0,
 		"[CharacterManager] No playable characters."

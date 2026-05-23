@@ -1,14 +1,15 @@
 [gd_resource type="BehaviorTree" format=3 uid="uid://cuqq60kkki04q"]
 
+[ext_resource type="Script" uid="uid://bgwg74u1okdge" path="res://BCTP/ai/tasks/play_animation.gd" id="1_kmg5j"]
+[ext_resource type="Script" uid="uid://dlh51s6njabf1" path="res://BCTP/ai/tasks/move_forward.gd" id="1_op5da"]
+[ext_resource type="Script" uid="uid://ctab1dbjljtdo" path="res://BCTP/ai/tasks/turn.gd" id="2_hdbck"]
+[ext_resource type="Script" uid="uid://gyigxe4hkdae" path="res://BCTP/ai/tasks/move_block_check.gd" id="3_ky2w8"]
+
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_4kr5q"]
 
-[sub_resource type="BBNode" id="BBNode_4kr5q"]
-saved_value = NodePath("AnimationPlayer")
-resource_name = "AnimationPlayer"
-
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ly2sx"]
-animation_player = SubResource("BBNode_4kr5q")
-animation_name = &"idle"
+[sub_resource type="BTAction" id="BTAction_2dhlc"]
+script = ExtResource("1_kmg5j")
+animation_string = "idle"
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_4kr5q"]
 min_duration = 0.7
@@ -16,10 +17,41 @@ max_duration = 1.5
 
 [sub_resource type="BTSequence" id="BTSequence_4kr5q"]
 custom_name = "take a break"
-children = [SubResource("BTPlayAnimation_ly2sx"), SubResource("BTRandomWait_4kr5q")]
+children = [SubResource("BTAction_2dhlc"), SubResource("BTRandomWait_4kr5q")]
+
+[sub_resource type="BTAction" id="BTAction_hdbck"]
+script = ExtResource("1_kmg5j")
+animation_string = "move"
+
+[sub_resource type="BTDecorator" id="BTDecorator_uu5b4"]
+script = ExtResource("3_ky2w8")
+
+[sub_resource type="BTAction" id="BTAction_en3gn"]
+script = ExtResource("2_hdbck")
+
+[sub_resource type="BTSequence" id="BTSequence_hdbck"]
+custom_name = "CheckCanMoveForward"
+children = [SubResource("BTDecorator_uu5b4"), SubResource("BTAction_en3gn")]
+
+[sub_resource type="BTInvert" id="BTInvert_hdbck"]
+children = [SubResource("BTSequence_hdbck")]
+
+[sub_resource type="BTAction" id="BTAction_oyeig"]
+script = ExtResource("1_op5da")
+
+[sub_resource type="BTSelector" id="BTSelector_hdbck"]
+children = [SubResource("BTInvert_hdbck"), SubResource("BTAction_oyeig")]
+
+[sub_resource type="BTRepeat" id="BTRepeat_hdbck"]
+forever = true
+children = [SubResource("BTSelector_hdbck")]
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_xsudx"]
+children = [SubResource("BTRepeat_hdbck")]
 
 [sub_resource type="BTSequence" id="BTSequence_ly2sx"]
 custom_name = "patrol"
+children = [SubResource("BTAction_hdbck"), SubResource("BTTimeLimit_xsudx")]
 
 [sub_resource type="BTSequence" id="BTSequence_xxl7c"]
 custom_name = "Main"
