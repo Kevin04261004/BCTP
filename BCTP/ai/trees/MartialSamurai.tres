@@ -1,0 +1,30 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://cuqq60kkki04q"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_4kr5q"]
+
+[sub_resource type="BBNode" id="BBNode_4kr5q"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ly2sx"]
+animation_player = SubResource("BBNode_4kr5q")
+animation_name = &"idle"
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_4kr5q"]
+min_duration = 0.7
+max_duration = 1.5
+
+[sub_resource type="BTSequence" id="BTSequence_4kr5q"]
+custom_name = "take a break"
+children = [SubResource("BTPlayAnimation_ly2sx"), SubResource("BTRandomWait_4kr5q")]
+
+[sub_resource type="BTSequence" id="BTSequence_ly2sx"]
+custom_name = "patrol"
+
+[sub_resource type="BTSequence" id="BTSequence_xxl7c"]
+custom_name = "Main"
+children = [SubResource("BTSequence_4kr5q"), SubResource("BTSequence_ly2sx")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_4kr5q")
+root_task = SubResource("BTSequence_xxl7c")

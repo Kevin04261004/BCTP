@@ -19,6 +19,12 @@ run/main_scene="uid://bdvclu03c11qk"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[file_customization]
+
+folder_colors={
+"res://BCTP/": "green"
+}
+
 [input]
 
 ui_left={

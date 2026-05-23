@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://cjbj2735jfh2c"]
-
-[ext_resource type="PackedScene" uid="uid://dvo5wsrwk0ul1" path="res://prefab/props/floor_test.tscn" id="1_6tkyq"]
-
-[node name="Stage1A" type="Node2D" unique_id=1814845811]
-
-[node name="floor_test" parent="." unique_id=1088818016 instance=ExtResource("1_6tkyq")]
-position = Vector2(0, 17.5)
-scale = Vector2(5, 0.25)
