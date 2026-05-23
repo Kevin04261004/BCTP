@@ -222,7 +222,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1fbwp")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack01",
 "speed": 5.0
 }, {
@@ -242,7 +242,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vel41")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack02",
 "speed": 5.0
 }, {
@@ -265,7 +265,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fsori")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack03",
 "speed": 5.0
 }, {
@@ -310,7 +310,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7by44")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 5.0
 }, {
@@ -321,7 +321,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8e5bs")
 }],
-"loop": true,
+"loop": false,
 "name": &"land",
 "speed": 5.0
 }, {
@@ -407,7 +407,7 @@ shape = SubResource("CapsuleShape2D_j2ds1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteRoot" unique_id=1847673567]
 sprite_frames = SubResource("SpriteFrames_q41tm")
-animation = &"idle"
+animation = &"walk"
 
 [node name="Area" type="Area2D" parent="SpriteRoot" unique_id=263112413]
 monitorable = false

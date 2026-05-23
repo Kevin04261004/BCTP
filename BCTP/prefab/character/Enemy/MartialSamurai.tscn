@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://i3or1v5mk7vr" path="res://BCTP/sprites/Martial Samurai/Attack2.png" id="4_pteax"]
 [ext_resource type="Texture2D" uid="uid://bxuw87fyhaelf" path="res://BCTP/sprites/Martial Samurai/Idle.png" id="5_ojjeg"]
 [ext_resource type="Texture2D" uid="uid://caacjw3cuytfq" path="res://BCTP/sprites/Martial Samurai/Fall.png" id="6_8gq03"]
-[ext_resource type="Texture2D" uid="uid://b4nq238y8d82i" path="res://BCTP/sprites/knight/JUMP.png" id="6_ojjeg"]
 [ext_resource type="Texture2D" uid="uid://bdt8f0q2v8mtk" path="res://BCTP/sprites/Martial Samurai/Jump.png" id="7_iihen"]
 [ext_resource type="Texture2D" uid="uid://cr88dsww78cij" path="res://BCTP/sprites/Martial Samurai/Take hit.png" id="9_5fm3r"]
 [ext_resource type="Texture2D" uid="uid://de688bpf1103o" path="res://BCTP/sprites/Martial Samurai/Run.png" id="10_jtg5q"]
@@ -119,10 +118,6 @@ region = Rect2(1200, 0, 200, 200)
 atlas = ExtResource("10_jtg5q")
 region = Rect2(1400, 0, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iwq5x"]
-atlas = ExtResource("6_ojjeg")
-region = Rect2(192, 0, 96, 84)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_utygg"]
 atlas = ExtResource("6_8gq03")
 region = Rect2(0, 0, 200, 200)
@@ -158,7 +153,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_c0ebo")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack01",
 "speed": 5.0
 }, {
@@ -175,7 +170,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jpfcv")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack02",
 "speed": 5.0
 }, {
@@ -211,7 +206,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vy4h1")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump_start",
 "speed": 5.0
 }, {
@@ -245,9 +240,6 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iwq5x")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_utygg")
 }, {
@@ -305,13 +297,14 @@ target_position = Vector2(150, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteRoot" unique_id=88529637]
 sprite_frames = SubResource("SpriteFrames_q41tm")
-animation = &"move"
+animation = &"attack01"
 
-[node name="Comp_Sensor" type="Node" parent="." unique_id=1785003273 node_paths=PackedStringArray("wall_raycast", "ground_raycast", "target_raycast")]
+[node name="Comp_Sensor" type="Node" parent="." unique_id=1785003273 node_paths=PackedStringArray("wall_raycast", "ground_raycast", "target_raycast", "attack_collision")]
 script = ExtResource("10_xrtah")
 wall_raycast = NodePath("../SpriteRoot/WallRaycast2D")
 ground_raycast = NodePath("../SpriteRoot/CheckGroundRaycast2D")
 target_raycast = NodePath("../SpriteRoot/FindTargetRaycast2D")
+attack_collision = NodePath("../SpriteRoot/AttackArea")
 
 [node name="Comp_Movement" type="Node" parent="." unique_id=344421595]
 script = ExtResource("11_k57be")

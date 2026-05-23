@@ -1,4 +1,4 @@
-extends BTAction
+extends BTCondition
 class_name BTDMoveBlockCheck
 
 var root: OnGroundEnemy
