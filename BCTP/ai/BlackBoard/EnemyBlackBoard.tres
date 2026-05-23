@@ -1,0 +1,27 @@
+[gd_resource type="BlackboardPlan" format=3 uid="uid://c4vs4n2cjpg3q"]
+
+[resource]
+var/target/name = &"target"
+var/target/type = 24
+var/target/hint = 0
+var/target/hint_string = ""
+var/current_state/name = &"current_state"
+var/current_state/type = 2
+var/current_state/value = 0
+var/current_state/hint = 0
+var/current_state/hint_string = ""
+var/is_attacking/name = &"is_attacking"
+var/is_attacking/type = 1
+var/is_attacking/value = false
+var/is_attacking/hint = 0
+var/is_attacking/hint_string = ""
+var/max_phase/name = &"max_phase"
+var/max_phase/type = 2
+var/max_phase/value = 1
+var/max_phase/hint = 0
+var/max_phase/hint_string = ""
+var/current_phase/name = &"current_phase"
+var/current_phase/type = 2
+var/current_phase/value = 1
+var/current_phase/hint = 0
+var/current_phase/hint_string = ""
