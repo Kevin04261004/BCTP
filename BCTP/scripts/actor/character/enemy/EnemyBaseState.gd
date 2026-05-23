@@ -13,10 +13,10 @@ class_name EnemyBaseState
 
 enum AIState
 {
-	NORMAL,
-	COMBAT,
-	STUN,
-	DEAD
+	NORMAL = 0,	# 0
+	COMBAT,		# 1
+	STUN,		# 2
+	DEAD		# 3
 }
 var enemy: Enemy
 
@@ -30,6 +30,8 @@ func setup():
 	super.setup()
 	enemy = root as Enemy
 	assert(enemy != null, "[EnemyBaseState] root is not Enemy.")
+	assert(enemy.bt_player != null, "[EnemyBaseState] enemy.bt_player is not Enemy.")
+	assert(enemy.bt_player.blackboard != null, "[EnemyBaseState] enemy.bt_player.blackboard is not Enemy.")
 
 func set_current_state(state: AIState):
 	enemy.bt_player.blackboard.set_var(BB_CURRENT_STATE, state)

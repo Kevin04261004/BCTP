@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://diuwbrdk03k0e" path="res://BCTP/scripts/actor/character/enemy/EnemyNormalState.gd" id="16_7j1v3"]
 [ext_resource type="Script" uid="uid://c27l1fn1uf7eq" path="res://BCTP/scripts/actor/character/enemy/EnemyCombatState.gd" id="17_7j1v3"]
 [ext_resource type="Script" uid="uid://baedrlcdxss7b" path="res://BCTP/scripts/actor/character/enemy/EnemyStunState.gd" id="18_82rr0"]
+[ext_resource type="Script" uid="uid://ds22banrkjus3" path="res://BCTP/scripts/actor/character/enemy/EnemyDeadState.gd" id="19_5xjb0"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_fq7sn"]
 
@@ -321,6 +322,7 @@ anim = NodePath("../SpriteRoot/AnimatedSprite2D")
 
 [node name="Comp_FSM" type="Node" parent="." unique_id=1696548461]
 script = ExtResource("15_g1jgd")
+initial_state = "State_Normal"
 
 [node name="State_Normal" type="Node" parent="Comp_FSM" unique_id=840310334]
 script = ExtResource("16_7j1v3")
@@ -332,3 +334,4 @@ script = ExtResource("17_7j1v3")
 script = ExtResource("18_82rr0")
 
 [node name="State_Dead" type="Node" parent="Comp_FSM" unique_id=1069374199]
+script = ExtResource("19_5xjb0")

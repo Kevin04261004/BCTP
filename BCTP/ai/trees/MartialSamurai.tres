@@ -31,56 +31,109 @@ var/current_phase/value = 1.0
 var/current_phase/hint = 0
 var/current_phase/hint_string = ""
 
-[sub_resource type="BTAction" id="BTAction_2dhlc"]
-script = ExtResource("1_kmg5j")
-animation_string = "idle"
+[sub_resource type="BBVariant" id="BBVariant_hdbck"]
+type = 2
+saved_value = 3
+resource_name = "3"
 
-[sub_resource type="BTRandomWait" id="BTRandomWait_4kr5q"]
-min_duration = 0.7
-max_duration = 1.5
+[sub_resource type="BTCheckVar" id="BTCheckVar_ky2w8"]
+variable = &"current_state"
+value = SubResource("BBVariant_hdbck")
 
-[sub_resource type="BTSequence" id="BTSequence_4kr5q"]
-custom_name = "take a break"
-children = [SubResource("BTAction_2dhlc"), SubResource("BTRandomWait_4kr5q")]
+[sub_resource type="BTSequence" id="BTSequence_uu5b4"]
+custom_name = "Dead Brunch"
+children = [SubResource("BTCheckVar_ky2w8")]
+_enabled = false
+
+[sub_resource type="BBVariant" id="BBVariant_ky2w8"]
+type = 2
+saved_value = 2
+resource_name = "2"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_en3gn"]
+variable = &"current_state"
+value = SubResource("BBVariant_ky2w8")
+
+[sub_resource type="BTSequence" id="BTSequence_oyeig"]
+custom_name = "Stun Brunch"
+children = [SubResource("BTCheckVar_en3gn")]
+_enabled = false
+
+[sub_resource type="BBVariant" id="BBVariant_uu5b4"]
+type = 2
+saved_value = 1
+resource_name = "1"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_oyeig"]
+variable = &"current_state"
+value = SubResource("BBVariant_uu5b4")
+
+[sub_resource type="BTSequence" id="BTSequence_asi76"]
+custom_name = "Combat Brunch"
+children = [SubResource("BTCheckVar_oyeig")]
+
+[sub_resource type="BBVariant" id="BBVariant_asi76"]
+type = 2
+saved_value = 0
+resource_name = "0"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_xsudx"]
+variable = &"current_state"
+value = SubResource("BBVariant_asi76")
 
 [sub_resource type="BTAction" id="BTAction_hdbck"]
 script = ExtResource("1_kmg5j")
+animation_string = "idle"
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_ky2w8"]
+min_duration = 0.7
+max_duration = 1.5
+
+[sub_resource type="BTSequence" id="BTSequence_en3gn"]
+custom_name = "take a break"
+children = [SubResource("BTAction_hdbck"), SubResource("BTRandomWait_ky2w8")]
+
+[sub_resource type="BTAction" id="BTAction_uu5b4"]
+script = ExtResource("1_kmg5j")
 animation_string = "move"
 
-[sub_resource type="BTAction" id="BTAction_ky2w8"]
+[sub_resource type="BTAction" id="BTAction_oyeig"]
 script = ExtResource("3_ky2w8")
 
-[sub_resource type="BTInvert" id="BTInvert_hdbck"]
-children = [SubResource("BTAction_ky2w8")]
+[sub_resource type="BTInvert" id="BTInvert_asi76"]
+children = [SubResource("BTAction_oyeig")]
 
-[sub_resource type="BTAction" id="BTAction_en3gn"]
+[sub_resource type="BTAction" id="BTAction_xsudx"]
 script = ExtResource("2_hdbck")
 
-[sub_resource type="BTSequence" id="BTSequence_hdbck"]
+[sub_resource type="BTSequence" id="BTSequence_1ojj7"]
 custom_name = "CheckCanMoveForward"
-children = [SubResource("BTInvert_hdbck"), SubResource("BTAction_en3gn")]
+children = [SubResource("BTInvert_asi76"), SubResource("BTAction_xsudx")]
 
-[sub_resource type="BTAction" id="BTAction_oyeig"]
+[sub_resource type="BTAction" id="BTAction_krrve"]
 script = ExtResource("1_op5da")
 
-[sub_resource type="BTSelector" id="BTSelector_hdbck"]
-children = [SubResource("BTSequence_hdbck"), SubResource("BTAction_oyeig")]
+[sub_resource type="BTSelector" id="BTSelector_1ldsr"]
+children = [SubResource("BTSequence_1ojj7"), SubResource("BTAction_krrve")]
 
-[sub_resource type="BTRepeat" id="BTRepeat_hdbck"]
+[sub_resource type="BTRepeat" id="BTRepeat_s82jo"]
 forever = true
-children = [SubResource("BTSelector_hdbck")]
+children = [SubResource("BTSelector_1ldsr")]
 
-[sub_resource type="BTTimeLimit" id="BTTimeLimit_xsudx"]
-children = [SubResource("BTRepeat_hdbck")]
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_x6lig"]
+children = [SubResource("BTRepeat_s82jo")]
 
-[sub_resource type="BTSequence" id="BTSequence_ly2sx"]
+[sub_resource type="BTSequence" id="BTSequence_sq3ra"]
 custom_name = "patrol"
-children = [SubResource("BTAction_hdbck"), SubResource("BTTimeLimit_xsudx")]
+children = [SubResource("BTAction_uu5b4"), SubResource("BTTimeLimit_x6lig")]
 
-[sub_resource type="BTSequence" id="BTSequence_xxl7c"]
-custom_name = "Main"
-children = [SubResource("BTSequence_4kr5q"), SubResource("BTSequence_ly2sx")]
+[sub_resource type="BTSequence" id="BTSequence_xsudx"]
+custom_name = "Normal Brunch"
+children = [SubResource("BTCheckVar_xsudx"), SubResource("BTSequence_en3gn"), SubResource("BTSequence_sq3ra")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_hdbck"]
+children = [SubResource("BTSequence_uu5b4"), SubResource("BTSequence_oyeig"), SubResource("BTSequence_asi76"), SubResource("BTSequence_xsudx")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_4kr5q")
-root_task = SubResource("BTSequence_xxl7c")
+root_task = SubResource("BTDynamicSelector_hdbck")

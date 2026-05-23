@@ -419,7 +419,7 @@ shape = SubResource("CircleShape2D_efxbq")
 
 [node name="Comp_FSM" type="Node" parent="." unique_id=140840068]
 script = ExtResource("2_4e3tg")
-initial_state = NodePath("State_Idle")
+initial_state = "State_Idle"
 
 [node name="State_Idle" type="Node" parent="Comp_FSM" unique_id=1678140385]
 script = ExtResource("3_g5w5n")
