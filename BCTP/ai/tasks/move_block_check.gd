@@ -1,4 +1,4 @@
-extends BTDecorator
+extends BTAction
 class_name BTDMoveBlockCheck
 
 var root: OnGroundEnemy

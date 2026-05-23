@@ -23,24 +23,24 @@ children = [SubResource("BTAction_2dhlc"), SubResource("BTRandomWait_4kr5q")]
 script = ExtResource("1_kmg5j")
 animation_string = "move"
 
-[sub_resource type="BTDecorator" id="BTDecorator_uu5b4"]
+[sub_resource type="BTAction" id="BTAction_ky2w8"]
 script = ExtResource("3_ky2w8")
+
+[sub_resource type="BTInvert" id="BTInvert_hdbck"]
+children = [SubResource("BTAction_ky2w8")]
 
 [sub_resource type="BTAction" id="BTAction_en3gn"]
 script = ExtResource("2_hdbck")
 
 [sub_resource type="BTSequence" id="BTSequence_hdbck"]
 custom_name = "CheckCanMoveForward"
-children = [SubResource("BTDecorator_uu5b4"), SubResource("BTAction_en3gn")]
-
-[sub_resource type="BTInvert" id="BTInvert_hdbck"]
-children = [SubResource("BTSequence_hdbck")]
+children = [SubResource("BTInvert_hdbck"), SubResource("BTAction_en3gn")]
 
 [sub_resource type="BTAction" id="BTAction_oyeig"]
 script = ExtResource("1_op5da")
 
 [sub_resource type="BTSelector" id="BTSelector_hdbck"]
-children = [SubResource("BTInvert_hdbck"), SubResource("BTAction_oyeig")]
+children = [SubResource("BTSequence_hdbck"), SubResource("BTAction_oyeig")]
 
 [sub_resource type="BTRepeat" id="BTRepeat_hdbck"]
 forever = true
