@@ -2,7 +2,6 @@ extends BTCondition
 class_name BTTargetInFront
 
 func _tick(_delta: float) -> Status:
-
 	var enemy := agent as Enemy
 
 	if enemy == null:
