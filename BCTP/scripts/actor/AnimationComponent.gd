@@ -16,5 +16,8 @@ func play_sprite_animation(anim_name:String):
 func play(anim_name:String):
 	animation_player.play(anim_name)
 
+func stop_all():
+	animation_player.stop()
+
 func _on_animation_finished(anim_name:String):
 	animation_finished.emit(anim_name)

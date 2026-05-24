@@ -44,7 +44,7 @@ script = ExtResource("10_33nw5")
 [node name="Entities" parent="." unique_id=946654570 instance=ExtResource("6_7k7cf")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=729134844]
-zoom = Vector2(1.75, 1.75)
+zoom = Vector2(1.5, 1.5)
 
 [node name="Store" type="Node2D" parent="." unique_id=1008558229]
 

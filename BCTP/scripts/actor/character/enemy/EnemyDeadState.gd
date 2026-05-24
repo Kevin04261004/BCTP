@@ -15,6 +15,7 @@ func enter(_msg := {}):
 	enemy.set_collision_layer(0)
 	enemy.set_collision_mask(0)
 
+	enemy.animation_component.stop_all()
 	enemy.animation_component.play("dead")
 	# Dead 애니메이션 종료 대기
 	enemy.animation_component.animation_finished.connect(

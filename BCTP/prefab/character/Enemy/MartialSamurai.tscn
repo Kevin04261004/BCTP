@@ -19,6 +19,8 @@
 [ext_resource type="Script" uid="uid://dx8spbvd3bp11" path="res://BCTP/scripts/actor/character/HealthComponent.gd" id="18_5xjb0"]
 [ext_resource type="Script" uid="uid://baedrlcdxss7b" path="res://BCTP/scripts/actor/character/enemy/EnemyStunState.gd" id="18_82rr0"]
 [ext_resource type="Script" uid="uid://ds22banrkjus3" path="res://BCTP/scripts/actor/character/enemy/EnemyDeadState.gd" id="19_5xjb0"]
+[ext_resource type="Texture2D" uid="uid://hnwi23oef752" path="res://demo/assets/hp_bar.png" id="20_vc8u2"]
+[ext_resource type="Script" uid="uid://c1d1k1kusdm7x" path="res://BCTP/scripts/actor/character/enemy/UI/EnemyHPBar.gd" id="21_pijse"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j2ds1"]
 height = 60.0
@@ -400,6 +402,14 @@ animations = [{
 "speed": 3.0
 }]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pijse"]
+texture = ExtResource("20_vc8u2")
+modulate_color = Color(18.892157, 18.892157, 18.892157, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_22ky1"]
+texture = ExtResource("20_vc8u2")
+modulate_color = Color(1, 0, 0, 1)
+
 [node name="MartialSamurai" type="CharacterBody2D" unique_id=125012825]
 collision_layer = 4
 slide_on_ceiling = false
@@ -481,5 +491,20 @@ animation_player = NodePath("../AnimationPlayer")
 script = ExtResource("14_5xjb0")
 attack_collision = NodePath("../SpriteRoot/AttackArea")
 
-[node name="Comp_Health" type="Node" parent="." unique_id=91620912]
+[node name="Comp_Health" type="Node" parent="." unique_id=2082689231]
 script = ExtResource("18_5xjb0")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1035116097]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+self_modulate = Color(18.892157, 18.892157, 18.892157, 1)
+offset_left = -25.0
+offset_top = -35.0
+offset_right = 25.0
+offset_bottom = -31.0
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+theme_override_styles/background = SubResource("StyleBoxTexture_pijse")
+theme_override_styles/fill = SubResource("StyleBoxTexture_22ky1")
+value = 100.0
+show_percentage = false
+script = ExtResource("21_pijse")

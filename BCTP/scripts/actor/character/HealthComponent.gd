@@ -11,7 +11,6 @@ var current_hp : float
 func _ready():
 	root = get_parent() as Character
 	assert(root != null)
-	
 	current_hp = root.stat_data.max_hp
 
 func take_damage(amount: float):
