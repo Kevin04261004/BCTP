@@ -13,7 +13,7 @@ func enter(_msg := {}):
 	stun_timer = 0.0
 	enemy.movement_component.stop_all()
 
-	enemy.animation_component.play_state("stun")
+	enemy.animation_component.play("stun")
 
 func physics_update(delta: float):
 	stun_timer += delta

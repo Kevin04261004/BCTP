@@ -6,8 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://drerfxrualgcn" path="res://BCTP/sprites/Martial Samurai/Attack1.png" id="3_xsxdi"]
 [ext_resource type="Texture2D" uid="uid://i3or1v5mk7vr" path="res://BCTP/sprites/Martial Samurai/Attack2.png" id="4_pteax"]
 [ext_resource type="Texture2D" uid="uid://bxuw87fyhaelf" path="res://BCTP/sprites/Martial Samurai/Idle.png" id="5_ojjeg"]
-[ext_resource type="Texture2D" uid="uid://caacjw3cuytfq" path="res://BCTP/sprites/Martial Samurai/Fall.png" id="6_8gq03"]
-[ext_resource type="Texture2D" uid="uid://bdt8f0q2v8mtk" path="res://BCTP/sprites/Martial Samurai/Jump.png" id="7_iihen"]
 [ext_resource type="Texture2D" uid="uid://cr88dsww78cij" path="res://BCTP/sprites/Martial Samurai/Take hit.png" id="9_5fm3r"]
 [ext_resource type="Texture2D" uid="uid://de688bpf1103o" path="res://BCTP/sprites/Martial Samurai/Run.png" id="10_jtg5q"]
 [ext_resource type="Script" uid="uid://dft2nfhgyf5dm" path="res://BCTP/scripts/actor/character/enemy/MartialSamurai/SensorComponent.gd" id="10_xrtah"]
@@ -20,10 +18,120 @@
 [ext_resource type="Script" uid="uid://baedrlcdxss7b" path="res://BCTP/scripts/actor/character/enemy/EnemyStunState.gd" id="18_82rr0"]
 [ext_resource type="Script" uid="uid://ds22banrkjus3" path="res://BCTP/scripts/actor/character/enemy/EnemyDeadState.gd" id="19_5xjb0"]
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_fq7sn"]
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j2ds1"]
 height = 60.0
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_fq7sn"]
+
+[sub_resource type="Animation" id="Animation_5xjb0"]
+resource_name = "attack01"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Comp_Animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["attack01"],
+"method": &"play_sprite_animation"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Comp_Attack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"perform_attack"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_vc8u2"]
+resource_name = "attack02"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Comp_Animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["attack02"],
+"method": &"play_sprite_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_7j1v3"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Comp_Animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["idle"],
+"method": &"play_sprite_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_82rr0"]
+resource_name = "move"
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Comp_Animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["move"],
+"method": &"play_sprite_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_pijse"]
+resource_name = "on_damage"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Comp_Animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["on_attack"],
+"method": &"play_sprite_animation"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vc8u2"]
+_data = {
+&"attack01": SubResource("Animation_5xjb0"),
+&"attack02": SubResource("Animation_vc8u2"),
+&"idle": SubResource("Animation_7j1v3"),
+&"move": SubResource("Animation_82rr0"),
+&"on_attack": SubResource("Animation_pijse")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8gq03"]
 
@@ -75,18 +183,6 @@ region = Rect2(400, 0, 200, 200)
 atlas = ExtResource("5_ojjeg")
 region = Rect2(600, 0, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nvdo8"]
-atlas = ExtResource("6_8gq03")
-region = Rect2(200, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3rs22"]
-atlas = ExtResource("7_iihen")
-region = Rect2(0, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vy4h1"]
-atlas = ExtResource("7_iihen")
-region = Rect2(200, 0, 200, 200)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_2t2gt"]
 atlas = ExtResource("10_jtg5q")
 region = Rect2(0, 0, 200, 200)
@@ -119,14 +215,6 @@ region = Rect2(1200, 0, 200, 200)
 atlas = ExtResource("10_jtg5q")
 region = Rect2(1400, 0, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_utygg"]
-atlas = ExtResource("6_8gq03")
-region = Rect2(0, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0thj3"]
-atlas = ExtResource("6_8gq03")
-region = Rect2(200, 0, 200, 200)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_su3cp"]
 atlas = ExtResource("9_5fm3r")
 region = Rect2(0, 0, 200, 200)
@@ -156,7 +244,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack01",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -173,7 +261,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack02",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -188,28 +276,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eln43")
 }],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nvdo8")
-}],
-"loop": true,
-"name": &"jump_end",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3rs22")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vy4h1")
-}],
 "loop": false,
-"name": &"jump_start",
-"speed": 5.0
+"name": &"idle",
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -236,20 +305,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t3mbc")
 }],
-"loop": true,
+"loop": false,
 "name": &"move",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_utygg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0thj3")
-}],
-"loop": true,
-"name": &"on_air",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -261,9 +319,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a7o35")
 }],
-"loop": true,
+"loop": false,
 "name": &"on_attack",
-"speed": 5.0
+"speed": 3.0
 }]
 
 [node name="MartialSamurai" type="CharacterBody2D" unique_id=125012825]
@@ -272,12 +330,17 @@ slide_on_ceiling = false
 script = ExtResource("1_fq7sn")
 stat_data = ExtResource("2_fq7sn")
 
+[node name="characterCollision" type="CollisionShape2D" parent="." unique_id=1010406740]
+shape = SubResource("CapsuleShape2D_j2ds1")
+
 [node name="BTPlayer" type="BTPlayer" parent="." unique_id=1857703944]
 behavior_tree = ExtResource("1_rytw3")
 blackboard_plan = SubResource("BlackboardPlan_fq7sn")
 
-[node name="characterCollision" type="CollisionShape2D" parent="." unique_id=1010406740]
-shape = SubResource("CapsuleShape2D_j2ds1")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=756011490]
+root_node = NodePath("../SpriteRoot")
+libraries/ = SubResource("AnimationLibrary_vc8u2")
+autoplay = &"idle"
 
 [node name="SpriteRoot" type="Node2D" parent="." unique_id=1775290210]
 
@@ -302,7 +365,7 @@ collision_mask = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteRoot" unique_id=88529637]
 sprite_frames = SubResource("SpriteFrames_q41tm")
-animation = &"attack01"
+animation = &"on_attack"
 
 [node name="Comp_Sensor" type="Node" parent="." unique_id=1785003273 node_paths=PackedStringArray("wall_raycast", "ground_raycast", "target_raycast", "attack_collision")]
 script = ExtResource("10_xrtah")
@@ -314,9 +377,10 @@ attack_collision = NodePath("../SpriteRoot/AttackArea")
 [node name="Comp_Movement" type="Node" parent="." unique_id=344421595]
 script = ExtResource("11_k57be")
 
-[node name="Comp_Animation" type="Node" parent="." unique_id=1499185180 node_paths=PackedStringArray("sprite")]
+[node name="Comp_Animation" type="Node" parent="." unique_id=1499185180 node_paths=PackedStringArray("sprite", "animation_player")]
 script = ExtResource("13_fq7sn")
 sprite = NodePath("../SpriteRoot/AnimatedSprite2D")
+animation_player = NodePath("../AnimationPlayer")
 
 [node name="Comp_Attack" type="Node" parent="." unique_id=1806951100]
 script = ExtResource("14_5xjb0")

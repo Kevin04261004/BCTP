@@ -8,7 +8,7 @@ var timer := 0.0
 
 func enter(_msg := {}):
 	root.movement_component.stop_vertical()
-	root.animation_component.play_state("attack01")
+	root.animation_component.play("attack01")
 	
 	# TODO: Attack!!
 	

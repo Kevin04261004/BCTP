@@ -2,7 +2,7 @@
 extends HeroBaseState
 
 func enter(_msg := {}):
-	root.animation_component.play_state("fall")
+	root.animation_component.play("fall")
 
 func handle_input(event):
 	if event.is_action_pressed("ui_dash"):
@@ -21,6 +21,6 @@ func physics_update(delta: float):
 	root.movement_component.apply()
 
 	if root.is_on_floor():
-		root.animation_component.play_state("land")
+		root.animation_component.play("land")
 		var next_state := ("State_Move" if dir != 0 else "State_Idle")
 		state_machine.change_state(next_state)

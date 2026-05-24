@@ -3,14 +3,18 @@ extends Node
 class_name AnimationComponent
 
 @export var sprite : AnimatedSprite2D
-signal animation_finished(animation_name)
+@export var animation_player : AnimationPlayer
+
+signal animation_finished(anim_name)
 
 func _ready():
-	sprite.animation_finished.connect(_on_animated_sprite_2d_animation_finished)
+	animation_player.animation_finished.connect(_on_animation_finished)
 
-func play_state(state: String):
-	if sprite.animation != state:
-		sprite.play(state)
+func play_sprite_animation(anim_name:String):
+	sprite.play(anim_name)
 
-func _on_animated_sprite_2d_animation_finished():
-	animation_finished.emit(sprite.animation)
+func play(anim_name:String):
+	animation_player.play(anim_name)
+
+func _on_animation_finished(anim_name:String):
+	animation_finished.emit(anim_name)

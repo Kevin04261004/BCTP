@@ -17,7 +17,7 @@ func can_attack() -> bool:
 func attack():
 	cooldown_timer = enemy.stat_data.attack_cooltime
 
-	perform_attack()
 
 func perform_attack():
+	print("Perform ATTACK")
 	pass

@@ -10,7 +10,7 @@ var sprite: CanvasItem
 func enter(_msg := {}):
 	set_current_state(AIState.DEAD)
 	enemy.movement_component.stop_all()
-	enemy.animation_component.play_state("dead")
+	enemy.animation_component.play("dead")
 
 	enemy.set_collision_layer_value(1, false)
 	enemy.set_collision_mask_value(1, false)

@@ -15,7 +15,7 @@ func _enter():
 
 	blackboard.set_var("is_attacking", true)
 	enemy.attack_component.attack()
-	enemy.animation_component.play_state("attack01")
+	enemy.animation_component.play("attack01")
 	
 func _tick(delta: float):
 	if finished:

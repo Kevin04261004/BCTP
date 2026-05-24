@@ -3,7 +3,7 @@ extends HeroBaseState
 
 func enter(_msg := {}):
 	root.movement_component.stop_all()
-	root.animation_component.play_state("idle")
+	root.animation_component.play("idle")
 
 func physics_update(delta):
 	root.movement_component.apply_gravity(delta)

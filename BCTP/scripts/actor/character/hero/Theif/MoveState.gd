@@ -16,7 +16,7 @@ func physics_update(delta):
 
 	root.movement_component.apply()
 
-	root.animation_component.play_state("run")
+	root.animation_component.play("run")
 
 	if not hero.is_on_floor():
 		state_machine.change_state("State_Fall");

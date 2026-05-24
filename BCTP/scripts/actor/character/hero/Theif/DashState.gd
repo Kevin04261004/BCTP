@@ -6,7 +6,7 @@ var timer: float
 func enter(_msg := {}):
 	hero.dash_component.set_cooltime()
 	timer = hero.hero_stat.dash_duration
-	root.animation_component.play_state("dash")
+	root.animation_component.play("dash")
 
 func physics_update(delta: float):
 	timer -= delta

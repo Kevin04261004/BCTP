@@ -19,7 +19,7 @@ var coyote_timer: float = 0.0
 
 func enter(msg := {}):
 	root.movement_component.jump(root.stat_data.jump_force)
-	root.animation_component.play_state("jump")
+	root.animation_component.play("jump")
 
 	coyote_timer = (coyote_time if msg.get("coyote", false) else 0.0)
 
@@ -54,6 +54,6 @@ func physics_update(delta: float):
 		return
 
 	if root.is_on_floor():
-		root.animation_component.play_state("State_Idle")
+		root.animation_component.play("idle")
 		var next_state := ("State_Walk" if dir != 0 else "State_Idle")
 		state_machine.change_state(next_state)

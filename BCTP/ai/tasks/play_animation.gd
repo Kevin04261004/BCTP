@@ -18,7 +18,7 @@ func _tick(delta: float) -> int:
 	assert(root.movement_component != null, "root.movement_component is NULL")
 
 	if not played:
-		root.animation_component.play_state(animation_string)
+		root.animation_component.play(animation_string)
 		played = true
 
 	return SUCCESS
