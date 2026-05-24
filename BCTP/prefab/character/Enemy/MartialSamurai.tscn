@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://dft2nfhgyf5dm" path="res://BCTP/scripts/actor/character/enemy/MartialSamurai/SensorComponent.gd" id="10_xrtah"]
 [ext_resource type="Script" uid="uid://37in8v5ejky5" path="res://BCTP/scripts/actor/character/MovementComponent.gd" id="11_k57be"]
 [ext_resource type="Script" uid="uid://c4ukbajxf3y2s" path="res://BCTP/scripts/actor/AnimationComponent.gd" id="13_fq7sn"]
+[ext_resource type="Script" uid="uid://b70x5cuglkk8k" path="res://BCTP/scripts/actor/character/enemy/AttackComponent.gd" id="14_5xjb0"]
 [ext_resource type="Script" uid="uid://drlmt0ltssgv2" path="res://BCTP/scripts/actor/character/StateMachine.gd" id="15_g1jgd"]
 [ext_resource type="Script" uid="uid://diuwbrdk03k0e" path="res://BCTP/scripts/actor/character/enemy/EnemyNormalState.gd" id="16_7j1v3"]
 [ext_resource type="Script" uid="uid://c27l1fn1uf7eq" path="res://BCTP/scripts/actor/character/enemy/EnemyCombatState.gd" id="17_7j1v3"]
@@ -266,6 +267,7 @@ animations = [{
 }]
 
 [node name="MartialSamurai" type="CharacterBody2D" unique_id=125012825]
+collision_layer = 4
 slide_on_ceiling = false
 script = ExtResource("1_fq7sn")
 stat_data = ExtResource("2_fq7sn")
@@ -280,6 +282,8 @@ shape = SubResource("CapsuleShape2D_j2ds1")
 [node name="SpriteRoot" type="Node2D" parent="." unique_id=1775290210]
 
 [node name="AttackArea" type="Area2D" parent="SpriteRoot" unique_id=444318043]
+collision_layer = 8
+collision_mask = 2
 
 [node name="attackCollision" type="CollisionShape2D" parent="SpriteRoot/AttackArea" unique_id=2040210890]
 position = Vector2(20, 1)
@@ -294,6 +298,7 @@ position = Vector2(10, 0)
 
 [node name="FindTargetRaycast2D" type="RayCast2D" parent="SpriteRoot" unique_id=1440383426]
 target_position = Vector2(150, 0)
+collision_mask = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteRoot" unique_id=88529637]
 sprite_frames = SubResource("SpriteFrames_q41tm")
@@ -309,9 +314,12 @@ attack_collision = NodePath("../SpriteRoot/AttackArea")
 [node name="Comp_Movement" type="Node" parent="." unique_id=344421595]
 script = ExtResource("11_k57be")
 
-[node name="Comp_Animation" type="Node" parent="." unique_id=1499185180 node_paths=PackedStringArray("anim")]
+[node name="Comp_Animation" type="Node" parent="." unique_id=1499185180 node_paths=PackedStringArray("sprite")]
 script = ExtResource("13_fq7sn")
-anim = NodePath("../SpriteRoot/AnimatedSprite2D")
+sprite = NodePath("../SpriteRoot/AnimatedSprite2D")
+
+[node name="Comp_Attack" type="Node" parent="." unique_id=1806951100]
+script = ExtResource("14_5xjb0")
 
 [node name="Comp_FSM" type="Node" parent="." unique_id=1696548461]
 script = ExtResource("15_g1jgd")

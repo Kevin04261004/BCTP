@@ -4,7 +4,9 @@
 [ext_resource type="Script" uid="uid://brakxmus8po74" path="res://BCTP/ai/tasks/is_target_in_attack_range.gd" id="1_ky2w8"]
 [ext_resource type="Script" uid="uid://dlh51s6njabf1" path="res://BCTP/ai/tasks/move_forward.gd" id="1_op5da"]
 [ext_resource type="Script" uid="uid://ctab1dbjljtdo" path="res://BCTP/ai/tasks/turn.gd" id="2_hdbck"]
+[ext_resource type="Script" uid="uid://bvon6231gehtb" path="res://BCTP/ai/tasks/can_attack.gd" id="2_uu5b4"]
 [ext_resource type="Script" uid="uid://gyigxe4hkdae" path="res://BCTP/ai/tasks/move_block_check.gd" id="3_ky2w8"]
+[ext_resource type="Script" uid="uid://dmbyd4ce5sbtt" path="res://BCTP/ai/tasks/attack.gd" id="4_en3gn"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_4kr5q"]
 var/target/name = &"target"
@@ -31,35 +33,6 @@ var/current_phase/type = 3
 var/current_phase/value = 1.0
 var/current_phase/hint = 0
 var/current_phase/hint_string = ""
-
-[sub_resource type="BBVariant" id="BBVariant_en3gn"]
-type = 1
-saved_value = true
-resource_name = "true"
-
-[sub_resource type="BTCheckVar" id="BTCheckVar_uu5b4"]
-variable = &"is_attacking"
-value = SubResource("BBVariant_en3gn")
-
-[sub_resource type="BTWait" id="BTWait_ky2w8"]
-duration = 3.0
-
-[sub_resource type="BTAction" id="BTAction_asi76"]
-script = ExtResource("1_kmg5j")
-animation_string = "idle"
-
-[sub_resource type="BBVariant" id="BBVariant_oyeig"]
-type = 1
-saved_value = false
-resource_name = "false"
-
-[sub_resource type="BTSetVar" id="BTSetVar_asi76"]
-variable = &"is_attacking"
-value = SubResource("BBVariant_oyeig")
-
-[sub_resource type="BTSequence" id="BTSequence_s82jo"]
-custom_name = "Stop Condition"
-children = [SubResource("BTCheckVar_uu5b4"), SubResource("BTWait_ky2w8"), SubResource("BTAction_asi76"), SubResource("BTSetVar_asi76")]
 
 [sub_resource type="BBVariant" id="BBVariant_hdbck"]
 type = 2
@@ -101,22 +74,46 @@ value = SubResource("BBVariant_uu5b4")
 [sub_resource type="BTCondition" id="BTCondition_en3gn"]
 script = ExtResource("1_ky2w8")
 
-[sub_resource type="BBVariant" id="BBVariant_x6lig"]
+[sub_resource type="BBVariant" id="BBVariant_en3gn"]
 type = 1
-saved_value = true
-resource_name = "true"
+saved_value = false
+resource_name = "false"
 
-[sub_resource type="BTSetVar" id="BTSetVar_sq3ra"]
+[sub_resource type="BTCheckVar" id="BTCheckVar_uu5b4"]
 variable = &"is_attacking"
-value = SubResource("BBVariant_x6lig")
+value = SubResource("BBVariant_en3gn")
 
-[sub_resource type="BTAction" id="BTAction_ky2w8"]
+[sub_resource type="BTCondition" id="BTCondition_oyeig"]
+script = ExtResource("2_uu5b4")
+
+[sub_resource type="BTAction" id="BTAction_1ldsr"]
 script = ExtResource("1_kmg5j")
-animation_string = "attack01"
+animation_string = "idle"
+
+[sub_resource type="BTWait" id="BTWait_uu5b4"]
+duration = 0.3
+
+[sub_resource type="BTAction" id="BTAction_asi76"]
+script = ExtResource("4_en3gn")
+
+[sub_resource type="BTSequence" id="BTSequence_s82jo"]
+custom_name = "Attack"
+children = [SubResource("BTCheckVar_uu5b4"), SubResource("BTCondition_oyeig"), SubResource("BTAction_1ldsr"), SubResource("BTWait_uu5b4"), SubResource("BTAction_asi76")]
+
+[sub_resource type="BTAction" id="BTAction_1ojj7"]
+script = ExtResource("1_kmg5j")
+animation_string = "idle"
+
+[sub_resource type="BTSequence" id="BTSequence_x6lig"]
+custom_name = "take a break"
+children = [SubResource("BTAction_1ojj7")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_x6lig"]
+children = [SubResource("BTSequence_s82jo"), SubResource("BTSequence_x6lig")]
 
 [sub_resource type="BTSequence" id="BTSequence_krrve"]
 custom_name = "Attack Brunch"
-children = [SubResource("BTCondition_en3gn"), SubResource("BTSetVar_sq3ra"), SubResource("BTAction_ky2w8")]
+children = [SubResource("BTCondition_en3gn"), SubResource("BTDynamicSelector_x6lig")]
 
 [sub_resource type="BTAction" id="BTAction_en3gn"]
 script = ExtResource("1_kmg5j")
@@ -197,7 +194,7 @@ children = [SubResource("BTCheckVar_xsudx"), SubResource("BTSequence_en3gn"), Su
 
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_hdbck"]
 custom_name = "Main"
-children = [SubResource("BTSequence_s82jo"), SubResource("BTSequence_uu5b4"), SubResource("BTSequence_oyeig"), SubResource("BTSequence_asi76"), SubResource("BTSequence_xsudx")]
+children = [SubResource("BTSequence_uu5b4"), SubResource("BTSequence_oyeig"), SubResource("BTSequence_asi76"), SubResource("BTSequence_xsudx")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_4kr5q")

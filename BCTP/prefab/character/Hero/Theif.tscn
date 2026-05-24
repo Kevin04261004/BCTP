@@ -14,9 +14,11 @@
 [ext_resource type="Script" uid="uid://d4ku2jskm2c5g" path="res://BCTP/scripts/actor/character/hero/Theif/AttackState.gd" id="4_x7e7i"]
 [ext_resource type="Script" uid="uid://dgocuces5j6xp" path="res://BCTP/scripts/actor/character/hero/Theif/JumpState.gd" id="6_xpxil"]
 [ext_resource type="Script" uid="uid://b76ovf20hq4pv" path="res://BCTP/scripts/actor/character/hero/Theif/FallState.gd" id="8_8e5bs"]
+[ext_resource type="Script" uid="uid://d3whendga0xsp" path="res://BCTP/scripts/actor/character/hero/Theif/DashState.gd" id="15_2p48u"]
 [ext_resource type="Script" uid="uid://37in8v5ejky5" path="res://BCTP/scripts/actor/character/MovementComponent.gd" id="16_b5vfj"]
 [ext_resource type="Texture2D" uid="uid://b1lwsuwcnfwjl" path="res://BCTP/sprites/knight/RUN.png" id="17_3gecw"]
 [ext_resource type="Script" uid="uid://c4ukbajxf3y2s" path="res://BCTP/scripts/actor/AnimationComponent.gd" id="17_cmc7k"]
+[ext_resource type="Script" uid="uid://c721rdrwyui2h" path="res://BCTP/scripts/actor/character/hero/DashComponent.gd" id="19_b2cya"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j2ds1"]
 height = 40.0
@@ -88,6 +90,18 @@ region = Rect2(384, 0, 96, 84)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fsori"]
 atlas = ExtResource("4_j2ds1")
 region = Rect2(480, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2i137"]
+atlas = ExtResource("17_3gecw")
+region = Rect2(480, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p48u"]
+atlas = ExtResource("17_3gecw")
+region = Rect2(672, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2cya"]
+atlas = ExtResource("17_3gecw")
+region = Rect2(576, 0, 96, 84)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iwq5x"]
 atlas = ExtResource("3_7igyw")
@@ -271,6 +285,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_2i137")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2p48u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2cya")
+}],
+"loop": false,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_iwq5x")
 }],
 "loop": true,
@@ -396,6 +424,7 @@ func enter(_msg := {}):
 "
 
 [node name="mainCharacter" type="CharacterBody2D" unique_id=884894237]
+collision_layer = 2
 slide_on_ceiling = false
 script = ExtResource("1_2i137")
 stat_data = ExtResource("2_5g8l5")
@@ -407,9 +436,13 @@ shape = SubResource("CapsuleShape2D_j2ds1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteRoot" unique_id=1847673567]
 sprite_frames = SubResource("SpriteFrames_q41tm")
-animation = &"walk"
+animation = &"dash"
+frame = 2
+frame_progress = 0.66385317
 
 [node name="Area" type="Area2D" parent="SpriteRoot" unique_id=263112413]
+collision_layer = 8
+collision_mask = 4
 monitorable = false
 
 [node name="attackCollision" type="CollisionShape2D" parent="SpriteRoot/Area" unique_id=536666826]
@@ -433,6 +466,9 @@ script = ExtResource("4_x7e7i")
 [node name="State_Jump" type="Node" parent="Comp_FSM" unique_id=722152958]
 script = ExtResource("6_xpxil")
 
+[node name="State_Dash" type="Node" parent="Comp_FSM" unique_id=1587876975]
+script = ExtResource("15_2p48u")
+
 [node name="State_Death" type="Node" parent="Comp_FSM" unique_id=904707596]
 script = SubResource("GDScript_cmc7k")
 
@@ -442,6 +478,9 @@ script = ExtResource("8_8e5bs")
 [node name="Comp_Movement" type="Node" parent="." unique_id=53266913]
 script = ExtResource("16_b5vfj")
 
-[node name="Comp_Animation" type="Node" parent="." unique_id=2041563414 node_paths=PackedStringArray("anim")]
+[node name="Comp_Animation" type="Node" parent="." unique_id=2041563414 node_paths=PackedStringArray("sprite")]
 script = ExtResource("17_cmc7k")
-anim = NodePath("../SpriteRoot/AnimatedSprite2D")
+sprite = NodePath("../SpriteRoot/AnimatedSprite2D")
+
+[node name="Comp_Dash" type="Node" parent="." unique_id=151393785]
+script = ExtResource("19_b2cya")

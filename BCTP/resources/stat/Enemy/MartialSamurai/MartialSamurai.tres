@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_huvvv")
+attack_cooltime = 4.0
 metadata/_custom_type_script = "uid://c6fkcbvrehm3a"

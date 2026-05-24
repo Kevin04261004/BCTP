@@ -19,8 +19,6 @@ class_name HeroStat
 
 @export var dash_cooldown: float = 1.0
 
-
-
 # =========================
 # Utility
 # =========================

@@ -41,6 +41,13 @@ func turn(direction: int = 0):
 	sprite_root.scale.x = facing_direction
 
 # =========================
+# Dash
+# =========================
+
+func dash(direction: float, dash_speed: float):
+	actor.velocity.x = direction * dash_speed
+
+# =========================
 # Jump
 # =========================
 

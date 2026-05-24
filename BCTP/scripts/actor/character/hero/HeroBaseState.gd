@@ -6,6 +6,7 @@ class_name HeroBaseState
 # Components
 # =========================
 
+var hero: Hero
 
 # =========================
 # Lifecycle
@@ -13,4 +14,4 @@ class_name HeroBaseState
 
 func setup():
 	super()
-	
+	hero = root as Hero

@@ -4,6 +4,10 @@ extends HeroBaseState
 func enter(_msg := {}):
 	root.animation_component.play_state("fall")
 
+func handle_input(event):
+	if event.is_action_pressed("ui_dash"):
+		state_machine.change_state("State_Dash")
+
 func physics_update(delta: float):
 	var dir := Input.get_axis("ui_left","ui_right")
 	

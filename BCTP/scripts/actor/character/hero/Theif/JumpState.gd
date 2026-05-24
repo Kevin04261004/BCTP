@@ -27,6 +27,10 @@ func enter(msg := {}):
 # Physics
 # =========================
 
+func handle_input(event):
+	if event.is_action_pressed("ui_dash") and hero.dash_component.can_use():
+		state_machine.change_state("State_Dash")
+
 func physics_update(delta: float):
 	root.movement_component.apply_gravity(delta)
 
