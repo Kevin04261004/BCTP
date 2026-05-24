@@ -1,5 +1,5 @@
 extends BTCondition
-class_name BTCanAttack
+class_name BTCCanAttack
 
 var enemy : Enemy
 

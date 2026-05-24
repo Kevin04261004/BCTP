@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://b1lwsuwcnfwjl" path="res://BCTP/sprites/knight/RUN.png" id="17_3gecw"]
 [ext_resource type="Script" uid="uid://c4ukbajxf3y2s" path="res://BCTP/scripts/actor/AnimationComponent.gd" id="17_cmc7k"]
 [ext_resource type="Script" uid="uid://c721rdrwyui2h" path="res://BCTP/scripts/actor/character/hero/DashComponent.gd" id="19_b2cya"]
+[ext_resource type="Script" uid="uid://b70x5cuglkk8k" path="res://BCTP/scripts/actor/character/AttackComponent.gd" id="20_5lg37"]
+[ext_resource type="Script" uid="uid://dx8spbvd3bp11" path="res://BCTP/scripts/actor/character/HealthComponent.gd" id="21_gwu60"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j2ds1"]
 height = 40.0
@@ -37,6 +39,20 @@ tracks/0/keys = {
 "values": [{
 "args": ["attack01"],
 "method": &"play_sprite_animation"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Comp_Attack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hit"
 }]
 }
 
@@ -609,7 +625,7 @@ autoplay = &"idle"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteRoot" unique_id=1847673567]
 sprite_frames = SubResource("SpriteFrames_q41tm")
-animation = &"run"
+animation = &"attack01"
 
 [node name="Area" type="Area2D" parent="SpriteRoot" unique_id=263112413]
 collision_layer = 8
@@ -656,3 +672,10 @@ animation_player = NodePath("../AnimationPlayer")
 
 [node name="Comp_Dash" type="Node" parent="." unique_id=151393785]
 script = ExtResource("19_b2cya")
+
+[node name="Comp_Attack" type="Node" parent="." unique_id=1947566427 node_paths=PackedStringArray("attack_collision")]
+script = ExtResource("20_5lg37")
+attack_collision = NodePath("../SpriteRoot/Area")
+
+[node name="Comp_Health" type="Node" parent="." unique_id=1376249361]
+script = ExtResource("21_gwu60")

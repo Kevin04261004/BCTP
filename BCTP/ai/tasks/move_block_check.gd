@@ -1,11 +1,11 @@
 extends BTCondition
-class_name BTDMoveBlockCheck
+class_name BTCMoveBlockCheck
 
-var root: OnGroundEnemy
+var root: Enemy
 
 
 func _enter() -> void:
-	root = agent as OnGroundEnemy
+	root = agent as Enemy
 	assert(root != null, "Root is NULL");
 
 

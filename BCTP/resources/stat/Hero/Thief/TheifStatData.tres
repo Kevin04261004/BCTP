@@ -10,4 +10,5 @@ dash_duration = 0.15
 dash_cooldown = 0.5
 display_name = "Theif"
 move_speed = 125.0
+attack_damage = 25
 metadata/_custom_type_script = "uid://dcv41hg0w7ap6"

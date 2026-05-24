@@ -9,12 +9,6 @@ class_name EnemyStat
 @export var chase_speed: float = 120.0
 
 # =========================
-# Attack
-# =========================
-
-@export var attack_cooltime : float = 3
-
-# =========================
 # Reward
 # =========================
 

@@ -28,6 +28,8 @@ class_name BaseStat
 
 @export var attack_speed: float = 1.0
 
+@export var attack_cooltime: float = 1
+
 # =========================
 # Defense
 # =========================

@@ -5,23 +5,27 @@ class_name SensorComponent
 # References
 # =========================
 
-var actor: CharacterBody2D
+var actor: Character
 
 @export var wall_raycast: RayCast2D
 @export var ground_raycast: RayCast2D
-@export var target_raycast: RayCast2D
-@export var attack_collision: Area2D
+@export var target_area: Area2D
+
+var targets: Array[Character] = []
 
 # =========================
 # Lifecycle
 # =========================
 
 func _ready():
-	assert(wall_raycast != null, "Wall Raycasr is NULL")
+	assert(wall_raycast != null, "wall_raycast is NULL")
 	assert(ground_raycast != null, "ground_raycast is NULL")
-	assert(target_raycast != null, "target_raycast is NULL")
-	assert(attack_collision != null, "attack_collision is NULL")
-	actor = get_parent()
+	assert(target_area != null, "target_area is NULL")
+
+	actor = get_parent() as Character
+
+	target_area.body_entered.connect(_on_target_entered)
+	target_area.body_exited.connect(_on_target_exited)
 
 # =========================
 # Wall
@@ -48,40 +52,54 @@ func is_ground_detected() -> bool:
 # =========================
 
 func has_target() -> bool:
-	if target_raycast == null:
-		return false
+	_cleanup_targets()
 
-	return target_raycast.is_colliding()
+	return not targets.is_empty()
 
-func get_target() -> Node2D:
-	if not has_target():
+func get_target() -> Character:
+	_cleanup_targets()
+
+	if targets.is_empty():
 		return null
 
-	var collider = target_raycast.get_collider()
+	var closest_target: Character = null
+	var closest_distance := INF
 
-	if collider is Hero:
-		return collider
+	for target in targets:
+		var distance := actor.global_position.distance_squared_to(
+			target.global_position
+		)
 
-	return null
+		if distance < closest_distance:
+			closest_distance = distance
+			closest_target = target
+
+	return closest_target
 
 # =========================
-# Attack
+# Internal
 # =========================
 
-func has_attack_target() -> bool:
-	return get_attack_target() != null
+func _on_target_entered(body: Node2D):
+	if not body is Character:
+		return
 
-func get_attack_target() -> Character:
-	if attack_collision == null:
-		return null
+	var character := body as Character
 
-	var bodies := attack_collision.get_overlapping_bodies()
+	if character.faction == actor.faction:
+		return
 
-	for body in bodies:
-		if body == actor:
-			continue
+	if targets.has(character):
+		return
 
-		if body is Hero:
-			return body
+	targets.append(character)
 
-	return null
+func _on_target_exited(body: Node2D):
+	if body is Character:
+		targets.erase(body)
+
+func _cleanup_targets():
+	targets = targets.filter(
+		func(target):
+			return is_instance_valid(target)
+	)

@@ -1,20 +1,22 @@
 [gd_scene format=3 uid="uid://cur35m2h0ceuq"]
 
-[ext_resource type="Script" uid="uid://s0q3sh33hs0q" path="res://BCTP/scripts/actor/character/enemy/OnGroundEnemy.gd" id="1_fq7sn"]
+[ext_resource type="Script" uid="uid://cgkslfkjnf2t6" path="res://BCTP/scripts/actor/character/enemy/Enemy.gd" id="1_5xjb0"]
 [ext_resource type="BehaviorTree" uid="uid://cuqq60kkki04q" path="res://BCTP/ai/trees/MartialSamurai.tres" id="1_rytw3"]
 [ext_resource type="Resource" uid="uid://c2uewsj2a7ude" path="res://BCTP/resources/stat/Enemy/MartialSamurai/MartialSamurai.tres" id="2_fq7sn"]
 [ext_resource type="Texture2D" uid="uid://drerfxrualgcn" path="res://BCTP/sprites/Martial Samurai/Attack1.png" id="3_xsxdi"]
 [ext_resource type="Texture2D" uid="uid://i3or1v5mk7vr" path="res://BCTP/sprites/Martial Samurai/Attack2.png" id="4_pteax"]
 [ext_resource type="Texture2D" uid="uid://bxuw87fyhaelf" path="res://BCTP/sprites/Martial Samurai/Idle.png" id="5_ojjeg"]
+[ext_resource type="Texture2D" uid="uid://cyisf4ygv7n1i" path="res://BCTP/sprites/Martial Samurai/Death.png" id="6_5xjb0"]
 [ext_resource type="Texture2D" uid="uid://cr88dsww78cij" path="res://BCTP/sprites/Martial Samurai/Take hit.png" id="9_5fm3r"]
 [ext_resource type="Texture2D" uid="uid://de688bpf1103o" path="res://BCTP/sprites/Martial Samurai/Run.png" id="10_jtg5q"]
 [ext_resource type="Script" uid="uid://dft2nfhgyf5dm" path="res://BCTP/scripts/actor/character/enemy/MartialSamurai/SensorComponent.gd" id="10_xrtah"]
 [ext_resource type="Script" uid="uid://37in8v5ejky5" path="res://BCTP/scripts/actor/character/MovementComponent.gd" id="11_k57be"]
 [ext_resource type="Script" uid="uid://c4ukbajxf3y2s" path="res://BCTP/scripts/actor/AnimationComponent.gd" id="13_fq7sn"]
-[ext_resource type="Script" uid="uid://b70x5cuglkk8k" path="res://BCTP/scripts/actor/character/enemy/AttackComponent.gd" id="14_5xjb0"]
+[ext_resource type="Script" uid="uid://b70x5cuglkk8k" path="res://BCTP/scripts/actor/character/AttackComponent.gd" id="14_5xjb0"]
 [ext_resource type="Script" uid="uid://drlmt0ltssgv2" path="res://BCTP/scripts/actor/character/StateMachine.gd" id="15_g1jgd"]
 [ext_resource type="Script" uid="uid://diuwbrdk03k0e" path="res://BCTP/scripts/actor/character/enemy/EnemyNormalState.gd" id="16_7j1v3"]
 [ext_resource type="Script" uid="uid://c27l1fn1uf7eq" path="res://BCTP/scripts/actor/character/enemy/EnemyCombatState.gd" id="17_7j1v3"]
+[ext_resource type="Script" uid="uid://dx8spbvd3bp11" path="res://BCTP/scripts/actor/character/HealthComponent.gd" id="18_5xjb0"]
 [ext_resource type="Script" uid="uid://baedrlcdxss7b" path="res://BCTP/scripts/actor/character/enemy/EnemyStunState.gd" id="18_82rr0"]
 [ext_resource type="Script" uid="uid://ds22banrkjus3" path="res://BCTP/scripts/actor/character/enemy/EnemyDeadState.gd" id="19_5xjb0"]
 
@@ -50,7 +52,7 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"perform_attack"
+"method": &"hit"
 }]
 }
 
@@ -67,6 +69,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": ["attack02"],
+"method": &"play_sprite_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_22ky1"]
+resource_name = "dead"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Comp_Animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["dead"],
 "method": &"play_sprite_animation"
 }]
 }
@@ -128,12 +147,15 @@ tracks/0/keys = {
 _data = {
 &"attack01": SubResource("Animation_5xjb0"),
 &"attack02": SubResource("Animation_vc8u2"),
+&"dead": SubResource("Animation_22ky1"),
 &"idle": SubResource("Animation_7j1v3"),
 &"move": SubResource("Animation_82rr0"),
 &"on_attack": SubResource("Animation_pijse")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8gq03"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5xjb0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mmxpw"]
 atlas = ExtResource("3_xsxdi")
@@ -166,6 +188,34 @@ region = Rect2(400, 0, 200, 200)
 [sub_resource type="AtlasTexture" id="AtlasTexture_jpfcv"]
 atlas = ExtResource("4_pteax")
 region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc8u2"]
+atlas = ExtResource("6_5xjb0")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pijse"]
+atlas = ExtResource("6_5xjb0")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22ky1"]
+atlas = ExtResource("6_5xjb0")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hveqq"]
+atlas = ExtResource("6_5xjb0")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1mfe"]
+atlas = ExtResource("6_5xjb0")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyecm"]
+atlas = ExtResource("6_5xjb0")
+region = Rect2(1000, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rau33"]
+atlas = ExtResource("6_5xjb0")
+region = Rect2(1200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h4afi"]
 atlas = ExtResource("5_ojjeg")
@@ -265,6 +315,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_vc8u2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pijse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_22ky1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hveqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1mfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyecm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rau33")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_h4afi")
 }, {
 "duration": 1.0,
@@ -327,7 +403,7 @@ animations = [{
 [node name="MartialSamurai" type="CharacterBody2D" unique_id=125012825]
 collision_layer = 4
 slide_on_ceiling = false
-script = ExtResource("1_fq7sn")
+script = ExtResource("1_5xjb0")
 stat_data = ExtResource("2_fq7sn")
 
 [node name="characterCollision" type="CollisionShape2D" parent="." unique_id=1010406740]
@@ -359,31 +435,17 @@ target_position = Vector2(25, 0)
 [node name="CheckGroundRaycast2D" type="RayCast2D" parent="SpriteRoot" unique_id=1017664073]
 position = Vector2(10, 0)
 
-[node name="FindTargetRaycast2D" type="RayCast2D" parent="SpriteRoot" unique_id=1440383426]
-target_position = Vector2(150, 0)
+[node name="FindTargetArea" type="Area2D" parent="SpriteRoot" unique_id=1680776532]
+scale = Vector2(20, 20)
+collision_layer = 8
 collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpriteRoot/FindTargetArea" unique_id=517752061]
+shape = SubResource("CircleShape2D_5xjb0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteRoot" unique_id=88529637]
 sprite_frames = SubResource("SpriteFrames_q41tm")
-animation = &"on_attack"
-
-[node name="Comp_Sensor" type="Node" parent="." unique_id=1785003273 node_paths=PackedStringArray("wall_raycast", "ground_raycast", "target_raycast", "attack_collision")]
-script = ExtResource("10_xrtah")
-wall_raycast = NodePath("../SpriteRoot/WallRaycast2D")
-ground_raycast = NodePath("../SpriteRoot/CheckGroundRaycast2D")
-target_raycast = NodePath("../SpriteRoot/FindTargetRaycast2D")
-attack_collision = NodePath("../SpriteRoot/AttackArea")
-
-[node name="Comp_Movement" type="Node" parent="." unique_id=344421595]
-script = ExtResource("11_k57be")
-
-[node name="Comp_Animation" type="Node" parent="." unique_id=1499185180 node_paths=PackedStringArray("sprite", "animation_player")]
-script = ExtResource("13_fq7sn")
-sprite = NodePath("../SpriteRoot/AnimatedSprite2D")
-animation_player = NodePath("../AnimationPlayer")
-
-[node name="Comp_Attack" type="Node" parent="." unique_id=1806951100]
-script = ExtResource("14_5xjb0")
+animation = &"dead"
 
 [node name="Comp_FSM" type="Node" parent="." unique_id=1696548461]
 script = ExtResource("15_g1jgd")
@@ -400,3 +462,24 @@ script = ExtResource("18_82rr0")
 
 [node name="State_Dead" type="Node" parent="Comp_FSM" unique_id=1069374199]
 script = ExtResource("19_5xjb0")
+
+[node name="Comp_Sensor" type="Node" parent="." unique_id=1785003273 node_paths=PackedStringArray("wall_raycast", "ground_raycast", "target_area")]
+script = ExtResource("10_xrtah")
+wall_raycast = NodePath("../SpriteRoot/WallRaycast2D")
+ground_raycast = NodePath("../SpriteRoot/CheckGroundRaycast2D")
+target_area = NodePath("../SpriteRoot/FindTargetArea")
+
+[node name="Comp_Movement" type="Node" parent="." unique_id=344421595]
+script = ExtResource("11_k57be")
+
+[node name="Comp_Animation" type="Node" parent="." unique_id=1499185180 node_paths=PackedStringArray("sprite", "animation_player")]
+script = ExtResource("13_fq7sn")
+sprite = NodePath("../SpriteRoot/AnimatedSprite2D")
+animation_player = NodePath("../AnimationPlayer")
+
+[node name="Comp_Attack" type="Node" parent="." unique_id=1806951100 node_paths=PackedStringArray("attack_collision")]
+script = ExtResource("14_5xjb0")
+attack_collision = NodePath("../SpriteRoot/AttackArea")
+
+[node name="Comp_Health" type="Node" parent="." unique_id=91620912]
+script = ExtResource("18_5xjb0")
