@@ -14,3 +14,7 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Godot atomic-save leftovers (e.g. Theif.tscn1234567890.tmp)
+*.tscn[0-9]*.tmp
+*.tres[0-9]*.tmp
